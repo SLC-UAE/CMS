@@ -106,7 +106,7 @@
     const ATTENTION_ITEMS = [
       { ref: "TRS-AT-2026-95", title: "Federal Environmental Legislation", stage: "Pre-Approved", note: "Requires approval", icon: "bi-hourglass-split", tone: "warning" },
       { ref: "LEG-LOC-2026-361", title: "Ratification Review — Bilateral Investment Treaty", stage: "In Progress", note: "Past Proposed Completion Date", icon: "bi-exclamation-triangle-fill", tone: "danger" },
-      { ref: "SLC-GEN-2026-00061", title: "IT Infrastructure Upgrade Request", stage: "In Progress", note: "Past Proposed Completion Date", icon: "bi-exclamation-triangle-fill", tone: "danger" },
+      { ref: "GEN-IT-2026-61", title: "IT Infrastructure Upgrade Request", stage: "In Progress", note: "Past Proposed Completion Date", icon: "bi-exclamation-triangle-fill", tone: "danger" },
       { ref: "LEG-TC-2026-362", title: "Legal Opinion on PPP Framework", stage: "In Progress", note: "Classified — restricted visibility", icon: "bi-shield-lock-fill", tone: "info" },
       { ref: "LEG-LOC-2026-360", title: "Amendment to Local Traffic and Roads Legislation", stage: "Registered", note: "Delayed milestone — 18 days in First Review", icon: "bi-clock-history", tone: "warning" },
       { ref: "TRS-AT-2026-94", title: "Official Gazette Issue No. 214", stage: "In Progress", note: "Registration action required", icon: "bi-clipboard-check", tone: "info" },

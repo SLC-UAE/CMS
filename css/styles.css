@@ -129,6 +129,11 @@ a:hover { color: var(--hover-red); }
 }
 
 .topnav-item { position: relative; }
+/* Let the link fill the full bar height so dropdown tabs (Reports, Management Console) centre like the rest */
+@media (min-width: 901px) {
+  .topnav-item { display: flex; }
+  .topnav-item > .topnav-link { flex: 1; }
+}
 .topnav-dropdown {
   display: none; position: absolute; top: 100%; left: 0; min-width: 260px; background: #fff;
   border-radius: 0 0 10px 10px; box-shadow: var(--slc-shadow-lg); border: 1px solid var(--slc-border); border-top: none;

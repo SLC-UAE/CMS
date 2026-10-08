@@ -184,7 +184,7 @@
       progressPct: 45,
     },
     {
-      ref: "SLC-TRN-2026-00114", systemNo: "SYS-2026-04490", classified: false,
+      ref: "TRS-AE-2026-114", systemNo: "SYS-2026-04490", classified: false,
       title: "Translation of Federal Environmental Protection Legislation (AR→EN)",
       titleAr: "ترجمة تشريع حماية البيئة الاتحادي",
       workType: "Translation", caseType: "Arabic to English Translation",
@@ -198,7 +198,7 @@
       progressPct: 55, relatedCase: "TRS-AT-2026-95",
     },
     {
-      ref: "SLC-GEN-2026-00052", systemNo: "SYS-2026-02244", classified: false,
+      ref: "GEN-CM-2026-52", systemNo: "SYS-2026-02244", classified: false,
       title: "Committee Formation — Legislative Comparison Working Group",
       titleAr: "تشكيل لجنة — فريق عمل المقارنة التشريعية",
       workType: "General", caseType: "Committees",
@@ -257,7 +257,7 @@
       progressPct: 60,
     },
     {
-      ref: "SLC-LAO-2026-00091", systemNo: "SYS-2026-03910", classified: false,
+      ref: "LAO-OI-2026-91", systemNo: "SYS-2026-03910", classified: false,
       title: "Official Interpretation of Public Procurement Legislation Art. 14",
       titleAr: "تفسير رسمي لتشريع المشتريات العامة — المادة 14",
       workType: "Legal Advice and Opinion", caseType: "Official Interpretation of Legislation",
@@ -272,7 +272,7 @@
       progressPct: 30,
     },
     {
-      ref: "SLC-GEN-2026-00048", systemNo: "SYS-2026-02110", classified: false,
+      ref: "GEN-LA-2026-48", systemNo: "SYS-2026-02110", classified: false,
       title: "Annual Legal Auditing Report — Directorate Compliance Review",
       titleAr: "تقرير التدقيق القانوني السنوي",
       workType: "General", caseType: "Legal Auditing",
@@ -286,7 +286,7 @@
       progressPct: 100,
     },
     {
-      ref: "SLC-TRN-2026-00098", systemNo: "SYS-2026-03100", classified: false,
+      ref: "TRS-AE-2026-98", systemNo: "SYS-2026-03100", classified: false,
       title: "Translation of Legal Advice — PPP Framework (Pending Translation)",
       titleAr: "ترجمة الرأي القانوني — إطار الشراكة",
       workType: "Translation", caseType: "Arabic to English Translation",
@@ -300,7 +300,7 @@
       progressPct: 25, relatedCase: "LEG-TC-2026-362",
     },
     {
-      ref: "SLC-LEG-2026-00073", systemNo: "SYS-2026-03005", classified: false,
+      ref: "LEG-LOC-2026-73", systemNo: "SYS-2026-03005", classified: false,
       title: "Repeal Review — Outdated Municipal Advertising Legislation",
       titleAr: "مراجعة إلغاء — تشريع الإعلانات البلدية",
       workType: "Legislation", caseType: "Local Legislations",
@@ -328,7 +328,7 @@
       progressPct: 5, missing: ["Case Receipt Date", "Lead Member", "Work Source Confirmation"],
     },
     {
-      ref: "SLC-RP-2026-00041", systemNo: "SYS-2026-03998", classified: false,
+      ref: "RP-LP-2026-41", systemNo: "SYS-2026-03998", classified: false,
       title: "Legislation Publications Bulletin — Legal Research Digest Vol. 9",
       titleAr: "نشرة المنشورات التشريعية — المجلد 9",
       workType: "Research and Publications", caseType: "Legislation Publications",
@@ -342,7 +342,7 @@
       progressPct: 5, missing: ["Case Receipt Date", "Lead Member"],
     },
     {
-      ref: "SLC-GEN-2026-00061", systemNo: "SYS-2026-04250", classified: false,
+      ref: "GEN-IT-2026-61", systemNo: "SYS-2026-04250", classified: false,
       title: "IT Infrastructure Upgrade Request — Directorate Workstations",
       titleAr: "طلب ترقية البنية التحتية لتقنية المعلومات",
       workType: "General", caseType: "Information Technology",
@@ -356,7 +356,7 @@
       progressPct: 40, overdue: true,
     },
     {
-      ref: "SLC-LEG-2026-00099", systemNo: "SYS-2026-03700", classified: false,
+      ref: "LEG-FED-2026-99", systemNo: "SYS-2026-03700", classified: false,
       title: "New Federal Legislation — Digital Government Services",
       titleAr: "تشريع اتحادي جديد — خدمات الحكومة الرقمية",
       workType: "Legislation", caseType: "Federal Legislations",
@@ -405,7 +405,7 @@
       { date: "2026-08-28 09:45", user: "u3", type: "Task Assigned", mode: "Manual", desc: "Assigned research task on PPP frameworks in comparable jurisdictions to Associate Member.", attachments: [], status: "Completed" },
       { date: "2026-02-10 09:00", user: "u4", type: "Case Registered", mode: "Automatic", desc: "Case registration cycle completed and reference number generated.", attachments: [], status: "Completed" },
     ],
-    "SLC-TRN-2026-00114": [
+    "TRS-AE-2026-114": [
       { date: "2026-09-19 08:40", user: "u12", type: "Translation Completed", mode: "Manual", desc: "First draft translation completed, pending proofreading.", attachments: ["FEPL_Translation_Draft1_EN.docx"], status: "Completed" },
       { date: "2026-08-31 09:15", user: "u6", type: "Case Registered", mode: "Automatic", desc: "Translation pending case auto-registered from Legislation Directorate request.", attachments: [], status: "Completed" },
     ],
@@ -528,19 +528,19 @@
   const TASKS = [
     { id: "T-1042", title: "Review Article 12 amendments", relatedCase: "TRS-AT-2026-95", assignedTo: "u2", assignedBy: "u1", start: "2026-09-15", due: "2026-09-22", priority: "High", status: "In Progress" },
     { id: "T-1043", title: "Compile PPP framework comparative research", relatedCase: "LEG-TC-2026-362", assignedTo: "u8", assignedBy: "u3", start: "2026-09-10", due: "2026-09-20", priority: "High", status: "In Progress" },
-    { id: "T-1044", title: "Proofread first draft translation", relatedCase: "SLC-TRN-2026-00114", assignedTo: "u12", assignedBy: "u6", start: "2026-09-19", due: "2026-09-23", priority: "Medium", status: "New" },
+    { id: "T-1044", title: "Proofread first draft translation", relatedCase: "TRS-AE-2026-114", assignedTo: "u12", assignedBy: "u6", start: "2026-09-19", due: "2026-09-23", priority: "Medium", status: "New" },
     { id: "T-1045", title: "Prepare Official Gazette Issue 214 layout", relatedCase: "TRS-AT-2026-94", assignedTo: "u10", assignedBy: "u9", start: "2026-09-08", due: "2026-09-18", priority: "Medium", status: "Overdue" },
-    { id: "T-1046", title: "Confirm committee member nominations", relatedCase: "SLC-GEN-2026-00052", assignedTo: "u4", assignedBy: "u9", start: "2026-09-01", due: "2026-09-14", priority: "Low", status: "Completed" },
+    { id: "T-1046", title: "Confirm committee member nominations", relatedCase: "GEN-CM-2026-52", assignedTo: "u4", assignedBy: "u9", start: "2026-09-01", due: "2026-09-14", priority: "Low", status: "Completed" },
     { id: "T-1047", title: "Draft acknowledgement letter to RTA", relatedCase: "LEG-LOC-2026-360", assignedTo: "u8", assignedBy: "u1", start: "2026-09-16", due: "2026-09-24", priority: "Medium", status: "New" },
     { id: "T-1048", title: "Coordinate with Ministry of Finance on treaty annex", relatedCase: "LEG-LOC-2026-361", assignedTo: "u2", assignedBy: "u1", start: "2026-09-05", due: "2026-09-15", priority: "High", status: "Overdue" },
-    { id: "T-1049", title: "Review IT infrastructure vendor quotations", relatedCase: "SLC-GEN-2026-00061", assignedTo: "u5", assignedBy: "u9", start: "2026-09-02", due: "2026-09-19", priority: "Low", status: "In Progress" },
+    { id: "T-1049", title: "Review IT infrastructure vendor quotations", relatedCase: "GEN-IT-2026-61", assignedTo: "u5", assignedBy: "u9", start: "2026-09-02", due: "2026-09-19", priority: "Low", status: "In Progress" },
   ];
 
   /* ---------------------------------------------------------------------- */
   /*  Reminders                                                              */
   /* ---------------------------------------------------------------------- */
   const REMINDERS = [
-    { id: "R-501", title: "Follow up on translation completion", relatedCase: "SLC-TRN-2026-00114", date: "2026-09-23", time: "09:00", assignedTo: "u12", type: "Case Activity", status: "Upcoming" },
+    { id: "R-501", title: "Follow up on translation completion", relatedCase: "TRS-AE-2026-114", date: "2026-09-23", time: "09:00", assignedTo: "u12", type: "Case Activity", status: "Upcoming" },
     { id: "R-502", title: "Executive Council submission deadline approaching", relatedCase: "TRS-AT-2026-95", date: "2026-09-28", time: "10:00", assignedTo: "u1", type: "PCD Auto-Reminder", status: "Upcoming" },
     { id: "R-503", title: "Official Gazette expected publication date", relatedCase: "TRS-AT-2026-94", date: "2026-09-29", time: "08:30", assignedTo: "u10", type: "PCD Auto-Reminder", status: "Upcoming" },
     { id: "R-504", title: "Request extension for treaty ratification review", relatedCase: "LEG-LOC-2026-361", date: "2026-09-21", time: "11:00", assignedTo: "u2", type: "Task Reminder", status: "Due Today" },
@@ -552,7 +552,7 @@
   /* ---------------------------------------------------------------------- */
   const NOTIFICATIONS = [
     { icon: "bi-signpost-split", text: "Case TRS-AT-2026-95 milestone updated to Final Review", time: "2 hours ago", unread: true },
-    { icon: "bi-translate", text: "Translation case SLC-TRN-2026-00114 draft completed", time: "5 hours ago", unread: true },
+    { icon: "bi-translate", text: "Translation case TRS-AE-2026-114 draft completed", time: "5 hours ago", unread: true },
     { icon: "bi-exclamation-triangle", text: "3 tasks are overdue and require attention", time: "Yesterday", unread: true },
     { icon: "bi-journal-text", text: "Official Gazette Issue 214 publication approaching (9 days)", time: "Yesterday", unread: false },
     { icon: "bi-person-plus", text: "You were assigned to case LEG-LOC-2026-360", time: "2 days ago", unread: false },

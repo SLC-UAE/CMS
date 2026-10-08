@@ -58,12 +58,28 @@
     </div>
   </div>
 
-  <!-- Row 2: three more charts -->
+  <!-- Row 2: classification chart + cases requiring attention -->
   <div class="row g-3 mt-1">
-    <div class="col-12 col-sm-6 col-lg-4">
+    <div class="col-12 col-lg-4">
       <div class="section-card h-100">
         <div class="sc-header"><span data-en="Cases by Classification" data-ar="معاملات حسب التصنيف الأساسي">Cases by Classification</span></div>
         <div class="sc-body"><div class="chart-box sm"><canvas id="chartWorkType"></canvas></div></div>
+      </div>
+    </div>
+    <div class="col-12 col-lg-8">
+      <div class="section-card h-100">
+        <div class="sc-header"><span data-en="Cases Requiring Attention" data-ar="آخر المستجدات في معاملاتي">Cases Requiring Attention</span></div>
+        <div class="sc-body pt-2" id="attentionList" style="max-height:236px;overflow-y:auto;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 3: completion performance + directorate + aging -->
+  <div class="row g-3 mt-1">
+    <div class="col-12 col-lg-4">
+      <div class="section-card h-100">
+        <div class="sc-header"><span data-en="Case Completion Performance" data-ar="أداء إغلاق المعاملات حسب الشهر">Case Completion Performance</span><span class="text-muted-soft" style="font-size:11.5px;font-weight:500;">Target vs. Completed — within/beyond SLA</span></div>
+        <div class="sc-body"><div class="chart-box sm"><canvas id="chartCompletion"></canvas></div></div>
       </div>
     </div>
     <div class="col-12 col-sm-6 col-lg-4">
@@ -72,25 +88,10 @@
         <div class="sc-body"><div class="chart-box sm"><canvas id="chartDirectorate"></canvas></div></div>
       </div>
     </div>
-    <div class="col-12 col-sm-12 col-lg-4">
+    <div class="col-12 col-sm-6 col-lg-4">
       <div class="section-card h-100">
         <div class="sc-header"><span data-en="Case Aging" data-ar="عمر المعاملات">Case Aging</span></div>
         <div class="sc-body"><div class="chart-box sm"><canvas id="chartAging"></canvas></div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row g-3 mt-1">
-    <div class="col-md-6">
-      <div class="section-card h-100">
-        <div class="sc-header"><span data-en="Case Completion Performance" data-ar="أداء إغلاق المعاملات حسب الشهر">Case Completion Performance</span><span class="text-muted-soft" style="font-size:11.5px;font-weight:500;">Target vs. Completed — within/beyond SLA</span></div>
-        <div class="sc-body"><div class="chart-box sm"><canvas id="chartCompletion"></canvas></div></div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="section-card h-100">
-        <div class="sc-header"><span data-en="Cases Requiring Attention" data-ar="آخر المستجدات في معاملاتي">Cases Requiring Attention</span></div>
-        <div class="sc-body pt-2" id="attentionList" style="max-height:236px;overflow-y:auto;"></div>
       </div>
     </div>
   </div>

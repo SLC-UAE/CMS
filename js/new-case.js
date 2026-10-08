@@ -97,7 +97,11 @@
         });
         showAlert(errors); return;
       }
-      const ref = "SLC-" + (D.WORK_TYPES.find(w => w.id === wtSel.value) || { code: "GEN" }).code + "-2026-00" + Math.floor(100 + Math.random() * 800);
+      // Reference format: <MAIN>-<SUB>-<YEAR>-<SEQ> e.g. LEG-LOC-2026-361 (sub = initials of the sub-classification)
+      const MAIN_PREFIX = { LEG: "LEG", LAO: "LAO", TRN: "TRS", GEN: "GEN", RP: "RP" };
+      const wt = D.WORK_TYPES.find(w => w.id === wtSel.value) || { code: "GEN" };
+      const sub = (document.getElementById("fCaseType").value || "").split(/[\s&-]+/).filter(Boolean).map(s => s[0].toUpperCase()).join("").slice(0, 3) || "GEN";
+      const ref = `${MAIN_PREFIX[wt.code]}-${sub}-2026-${Math.floor(100 + Math.random() * 800)}`;
       showAlert(null, `Case ${ref} registered successfully.`);
       A.demoActionModal(`Case ${ref} registered successfully.`);
     });

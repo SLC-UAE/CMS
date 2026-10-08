@@ -60,15 +60,15 @@
 
   const AUDIT_TRAIL = [
     { user: "u4", action: "Registered new case", target: "LEG-LOC-2026-360", ts: "2026-09-19 08:40" },
-    { user: "u5", action: "Deleted a case activity", target: "SLC-LEG-2026-00073", ts: "2026-09-19 14:12" },
+    { user: "u5", action: "Deleted a case activity", target: "LEG-LOC-2026-73", ts: "2026-09-19 14:12" },
     { user: "u9", action: "Approved classified case access", target: "LAO-LA-2025-50", ts: "2026-09-18 11:05" },
-    { user: "u6", action: "Updated a document version", target: "SLC-TRN-2026-00114", ts: "2026-09-18 10:20" },
+    { user: "u6", action: "Updated a document version", target: "TRS-AE-2026-114", ts: "2026-09-18 10:20" },
     { user: "u1", action: "Approved milestone change to Final Review", target: "TRS-AT-2026-95", ts: "2026-09-17 15:50" },
     { user: "u5", action: "Added new user account (Layla Al Qassimi)", target: "System — User Management", ts: "2026-09-16 09:30" },
     { user: "u2", action: "Edited case general details", target: "LEG-LOC-2026-361", ts: "2026-09-16 13:22" },
     { user: "u9", action: "Modified role permissions for Case Monitor", target: "System — Roles & Permissions", ts: "2026-09-15 17:05" },
     { user: "u7", action: "Approved legal advice sign-off", target: "LEG-TC-2026-362", ts: "2026-09-15 12:40" },
-    { user: "u4", action: "Cancelled pending case", target: "SLC-RP-2026-00041", ts: "2026-09-12 10:15" },
+    { user: "u4", action: "Cancelled pending case", target: "RP-LP-2026-41", ts: "2026-09-12 10:15" },
   ];
 
   /* Flattened case type master, joined to parent work type */
@@ -277,7 +277,7 @@
       <tr>
         <td data-sort-value="${D.userById(a.user).name}">${A.userChip(a.user)}</td>
         <td>${a.action}</td>
-        <td>${a.target.indexOf("SLC-") === 0 ? `<a class="ref-link" href="case-workspace.html?ref=${a.target}">${a.target}</a>` : a.target}</td>
+        <td>${D.caseByRef(a.target) ? `<a class="ref-link" href="case-workspace.html?ref=${a.target}">${a.target}</a>` : a.target}</td>
         <td style="font-size:12.2px;color:var(--slc-muted);">${a.ts}</td>
       </tr>`).join("");
 
