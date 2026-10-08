@@ -93,6 +93,8 @@ document.getElementById("ssoBtn").addEventListener("click", function(){
   setTimeout(() => { window.location.href = "dashboard.html"; }, 700);
 });
 function applyLoginLang(lang){
+  // Save the choice so the app (SLCApp reads "slc_lang") opens in the same language after sign-in
+  try { localStorage.setItem("slc_lang", lang); } catch(e) {}
   document.querySelectorAll("[data-en]").forEach(function(el){
     const val = lang === "ar" ? el.getAttribute("data-ar") : el.getAttribute("data-en");
     if (val) el.textContent = val;
@@ -129,6 +131,8 @@ document.getElementById("loginThemeDark").addEventListener("click", function(){ 
 (function(){
   try { setLoginTheme(localStorage.getItem("slc_theme") === "dark" ? "dark" : "light"); } catch(e) {}
 })();
+// Re-open the login page in the language chosen last time
+try { if (localStorage.getItem("slc_lang") === "ar") document.getElementById("loginLangAr").click(); } catch(e) {}
 </script>
 </body>
 </html>
