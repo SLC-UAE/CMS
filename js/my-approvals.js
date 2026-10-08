@@ -60,7 +60,7 @@
         <td><span class="badge-status badge-info">${a.stage}</span></td>
         <td>${A.fmtDate(a.submitted)}</td>
         <td>${A.userChip(a.by)}</td>
-        <td><button class="btn btn-sm btn-outline-primary" onclick="SLCApp.demoActionModal('Approval recorded successfully in prototype mode.')">Review</button></td>
+        <td><button class="btn btn-sm btn-outline-primary" onclick="SLCApp.demoActionModal('Approval recorded successfully in prototype mode.')" data-en="Review" data-ar="فتح للمعاينة">Review</button></td>
       </tr>`;
   }
 
@@ -98,6 +98,7 @@
       : `<tr><td colspan="7" class="text-center text-muted-soft py-4">No approvals pending — you're all caught up.</td></tr>`;
     const shownFrom = filtered.length ? start + 1 : 0;
     const shownTo = Math.min(start + PAGE_SIZE, filtered.length);
+    A.retranslate();  // rows are re-rendered on sort/search/paging
     document.getElementById("maResultCount").textContent = `Showing ${shownFrom}–${shownTo} of ${filtered.length} pending approvals`;
   }
 

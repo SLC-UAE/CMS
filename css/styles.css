@@ -418,6 +418,20 @@ tr.row-classified:hover { background: var(--hover-red-light) !important; }
 .tab-panels { background: #fff; border: 1px solid var(--slc-border); border-top: none; border-radius: 0 0 var(--slc-radius) var(--slc-radius); box-shadow: var(--slc-shadow-sm); margin-bottom: 18px; }
 .tab-panel { display: none; padding: 20px; animation: tabFadeIn .18s ease; }
 .tab-panel.active { display: block; }
+/* Accordion sections — Register Case */
+.case-accordion { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
+.acc-item { background: #fff; border: 1px solid var(--slc-border); border-radius: var(--slc-radius); box-shadow: var(--slc-shadow-sm); overflow: hidden; }
+.acc-head {
+  width: 100%; display: flex; align-items: center; justify-content: space-between; border: none; background: #F3F4F6;
+  padding: 12px 18px; font-size: 14px; font-weight: 700; color: #374151; cursor: pointer; text-align: left;
+  transition: color .15s ease, background .15s ease;
+}
+.acc-head:hover { background: var(--hover-red-light); color: var(--hover-red); }
+.acc-item.open .acc-head { background: #374151; color: #FFFFFF; }
+.acc-head i { transition: transform .2s ease; }
+.acc-item.open .acc-head i { transform: rotate(180deg); }
+.acc-body { display: none; padding: 20px; animation: tabFadeIn .18s ease; }
+.acc-item.open .acc-body { display: block; }
 @keyframes tabFadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
 /* ---------------------------------------------------------------------- */

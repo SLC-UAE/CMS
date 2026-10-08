@@ -29,7 +29,7 @@
     function rebuildCaseTypeOptions(filterWorkType) {
       const ctSel = document.getElementById("fCaseType");
       const prevVal = ctSel.value;
-      ctSel.innerHTML = `<option value="">All Case Types</option>`;
+      ctSel.innerHTML = `<option value="">All Sub-Classifications</option>`;
       D.WORK_TYPES.forEach(w => {
         if (filterWorkType && w.id !== filterWorkType) return;
         const grp = document.createElement("optgroup");
@@ -42,6 +42,7 @@
         ctSel.appendChild(grp);
       });
       if ([...ctSel.options].some(o => o.value === prevVal)) ctSel.value = prevVal;
+      A.retranslate();
     }
     rebuildCaseTypeOptions(null);
     wtSel.addEventListener("change", () => rebuildCaseTypeOptions(wtSel.value || null));
@@ -120,7 +121,6 @@
         <td>${c.workType}<div class="text-muted-soft" style="font-size:11px;">${c.caseType}</div></td>
         <td>${c.requestingEntity}</td>
         <td>${A.workflowBadge(c.milestone)}</td>
-        <td>${A.urgencyBadge(c.urgency)}</td>
         <td>${A.fmtDate(c.pcd)}</td>
         <td>${statusBadge(c.status)}</td>
       </tr>`;
@@ -132,7 +132,6 @@
   function sortValue(c, field) {
     switch (field) {
       case "milestone": return A.workflowStageIndex(c.milestone);
-      case "urgency": return ["Low", "Medium", "High", "Very High"].indexOf(c.urgency);
       default: return c[field];
     }
   }
@@ -164,7 +163,7 @@
     document.getElementById("resultCount").textContent = `${results.length} case${results.length === 1 ? "" : "s"} found`;
     document.querySelector("#resultsTable tbody").innerHTML = results.length
       ? results.map(c => rowHtml(c)).join("")
-      : `<tr><td colspan="8" class="text-center text-muted-soft py-4">No cases match your search criteria.</td></tr>`;
+      : `<tr><td colspan="7" class="text-center text-muted-soft py-4">No cases match your search criteria.</td></tr>`;
   }
 
   /* ---------------------------------------------------------------- */

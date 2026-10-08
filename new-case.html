@@ -22,29 +22,20 @@
 
   <div class="page-title-row">
     <div>
-      <h1 class="page-title" data-en="Register Case" data-ar="تسجيل قضية جديدة">Register Case</h1>
+      <h1 class="page-title" data-en="Register Case" data-ar="تسجيل معاملة">Register Case</h1>
       <div class="page-subtitle">Fields marked with <span class="text-danger">*</span> are required to save the case as pending. Additional fields are required to complete registration.</div>
-    </div>
-    <div class="page-title-actions">
-      <span class="badge-status badge-muted"><i class="bi bi-hourglass-split"></i>Status: Draft (Not Yet Saved)</span>
     </div>
   </div>
 
   <form id="newCaseForm" onsubmit="return false;">
 
-    <!-- Horizontal tabs -->
-    <div class="tab-nav" id="newCaseTabs">
-      <button type="button" class="tab-btn active" data-tab="tabCaseDetails">Case Details</button>
-      <button type="button" class="tab-btn" data-tab="tabTeamDetails">Team Details</button>
-      <button type="button" class="tab-btn" data-tab="tabRequestingEntity">Requesting Entity</button>
-      <button type="button" class="tab-btn" data-tab="tabOtherParties">Other Parties</button>
-    </div>
-
-    <div class="tab-panels" id="newCasePanels">
+    <!-- Accordion sections -->
+    <div class="case-accordion" id="newCaseAccordion">
 
       <!-- Case Details -->
-      <div class="tab-panel active" id="tabCaseDetails">
-        <div class="row g-3">
+      <div class="acc-item open" id="tabCaseDetails">
+        <button type="button" class="acc-head" aria-expanded="true"><span data-en="Case Details" data-ar="تفاصيل المعاملة">Case Details</span><i class="bi bi-chevron-down"></i></button>
+        <div class="acc-body"><div class="row g-3">
           <div class="col-md-3">
             <div class="form-check form-switch mt-4">
               <input class="form-check-input" type="checkbox" id="fClassified">
@@ -52,62 +43,66 @@
             </div>
           </div>
           <div class="col-md-3">
-            <label class="form-label">Case Ref. No.</label>
+            <label class="form-label" data-en="Case Ref. No." data-ar="المرجع">Case Ref. No.</label>
             <input type="text" class="form-control" value="Auto-generated on registration" disabled>
           </div>
           <div class="col-md-3">
-            <label class="form-label">System No.</label>
+            <label class="form-label" data-en="System No." data-ar="مرجع النظام">System No.</label>
             <input type="text" class="form-control" value="Auto-generated" disabled>
           </div>
           <div class="col-md-3">
-            <label class="form-label">Old Reference No.</label>
+            <label class="form-label" data-en="Old Reference No." data-ar="مرجع النظام القديم">Old Reference No.</label>
             <input type="text" class="form-control" placeholder="For migrated cases only">
           </div>
 
           <div class="col-md-3">
-            <label class="form-label">Case Start Date (CSD)</label>
-            <input type="text" class="form-control" value="21-Sep-2026 (auto)" disabled>
+            <label class="form-label" data-en="Case Start Date (CSD)" data-ar="تاريخ التسجيل">Case Start Date (CSD)</label>
+            <input type="date" class="form-control" id="fCsd">
           </div>
           <div class="col-md-3">
-            <label class="form-label">Case Registration Completed Date</label>
+            <label class="form-label" data-en="Case Registration Completed Date" data-ar="تاريخ بدء العمل">Case Registration Completed Date</label>
             <input type="text" class="form-control" value="Auto-populated on registration" disabled>
           </div>
           <div class="col-md-3">
-            <label class="form-label">Registered By</label>
+            <label class="form-label" data-en="Registered By" data-ar="سجل بواسطة">Registered By</label>
             <input type="text" class="form-control" value="Sara Al Mazrouei (auto)" disabled>
-          </div>
-          <div class="col-md-3">
-            <label class="form-label form-label-req">Urgency</label>
-            <select class="form-select" id="fUrgency">
-              <option>Very High</option><option>High</option><option selected>Medium</option><option>Low</option>
-            </select>
           </div>
 
           <div class="col-md-3">
-            <label class="form-label form-label-req">Work Type</label>
+            <label class="form-label form-label-req" data-en="Main Classification" data-ar="التصنيف الرئيسي">Main Classification</label>
             <select class="form-select" id="fWorkType" onchange="onWorkTypeChange()">
-              <option value="">Select work type...</option>
+              <option value="">Select main classification...</option>
             </select>
           </div>
           <div class="col-md-3">
-            <label class="form-label form-label-req">Case Type</label>
-            <select class="form-select" id="fCaseType"><option value="">Select work type first...</option></select>
+            <label class="form-label form-label-req" data-en="Sub-Classification" data-ar="التصنيف الفرعي">Sub-Classification</label>
+            <select class="form-select" id="fCaseType"><option value="">Select main classification first...</option></select>
           </div>
-          <div class="col-md-6">
-            <label class="form-label form-label-req">Case Title</label>
+          <div class="col-md-9">
+            <label class="form-label form-label-req" data-en="Case Title" data-ar="عنوان المعاملة">Case Title</label>
             <input type="text" class="form-control" placeholder="Enter case title...">
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label form-label-req">Proposed Completion Date (PCD)</label>
+            <input type="date" class="form-control" id="fPcd">
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Actual Completion Date (ACD)</label>
+            <input type="date" class="form-control" id="fAcd">
           </div>
 
           <div class="col-12">
             <label class="form-label">Other Details</label>
             <textarea class="form-control" rows="2" placeholder="Additional notes..."></textarea>
           </div>
-        </div>
+        </div></div>
       </div>
 
       <!-- Team Details -->
-      <div class="tab-panel" id="tabTeamDetails">
-        <div class="row g-3">
+      <div class="acc-item" id="tabTeamDetails">
+        <button type="button" class="acc-head" aria-expanded="false"><span data-en="Team Details" data-ar="فريق العمل">Team Details</span><i class="bi bi-chevron-down"></i></button>
+        <div class="acc-body"><div class="row g-3">
           <div class="col-md-6">
             <label class="form-label form-label-req">Head of Directorate</label>
             <select class="form-select" id="fHod"></select>
@@ -124,12 +119,13 @@
             <label class="form-label form-label-req">Administrators</label>
             <select class="form-select" multiple id="fAdmin" size="4"></select>
           </div>
-        </div>
+        </div></div>
       </div>
 
       <!-- Requesting Entity -->
-      <div class="tab-panel" id="tabRequestingEntity">
-        <div class="row g-3">
+      <div class="acc-item" id="tabRequestingEntity">
+        <button type="button" class="acc-head" aria-expanded="false"><span data-en="Requesting Entity" data-ar="الجهة الحكومية">Requesting Entity</span><i class="bi bi-chevron-down"></i></button>
+        <div class="acc-body"><div class="row g-3">
           <div class="col-md-4">
             <label class="form-label form-label-req">Requesting Entity Type</label>
             <select class="form-select">
@@ -148,12 +144,13 @@
             <label class="form-label">Comments</label>
             <textarea class="form-control" rows="2" placeholder="Requesting entity notes..."></textarea>
           </div>
-        </div>
+        </div></div>
       </div>
 
       <!-- Other Parties -->
-      <div class="tab-panel" id="tabOtherParties">
-        <div class="row g-3">
+      <div class="acc-item" id="tabOtherParties">
+        <button type="button" class="acc-head" aria-expanded="false"><span data-en="Other Parties" data-ar="موعد الإنجاز">Other Parties</span><i class="bi bi-chevron-down"></i></button>
+        <div class="acc-body"><div class="row g-3">
           <div class="col-md-4">
             <label class="form-label">Related Entity Name</label>
             <select class="form-select" id="fRelEntity"></select>
@@ -166,7 +163,7 @@
             <label class="form-label">Expert</label>
             <input type="text" class="form-control" placeholder="Search expert...">
           </div>
-        </div>
+        </div></div>
       </div>
 
     </div>
@@ -174,10 +171,8 @@
     <div id="formAlertBox"></div>
 
     <div class="d-flex gap-2 justify-content-end flex-wrap pb-4">
-      <button type="button" class="btn btn-light border" id="btnReset"><i class="bi bi-arrow-counterclockwise"></i>Reset</button>
-      <button type="button" class="btn btn-light border" onclick="window.location.href='live-cases.html'"><i class="bi bi-x-lg"></i>Cancel</button>
-      <button type="button" class="btn btn-outline-primary" id="btnSave"><i class="bi bi-save"></i>Save</button>
-      <button type="button" class="btn btn-primary" id="btnSaveRegister"><i class="bi bi-check2-circle"></i>Save & Register</button>
+      <button type="button" class="btn btn-light border" id="btnReset"><i class="bi bi-arrow-counterclockwise"></i><span data-en="Reset" data-ar="حذف الخانات">Reset</span></button>
+      <button type="button" class="btn btn-primary" id="btnSaveRegister"><i class="bi bi-check2-circle"></i><span data-en="Register" data-ar="تسجيل">Register</span></button>
     </div>
 
   </form>

@@ -16,6 +16,9 @@
     });
   }
 
+  const isAr = () => localStorage.getItem("slc_lang") === "ar";
+  const workTypeLabels = () => D.WORK_TYPES.map(w => isAr() ? w.ar : w.id);
+
   document.addEventListener("DOMContentLoaded", function () {
     A.renderShell("dashboard", [{ label: "Dashboard" }]);
     const t = A.chartTheme();
@@ -42,7 +45,7 @@
     charts.push(new Chart(document.getElementById("chartWorkType"), {
       type: "doughnut",
       data: {
-        labels: D.WORK_TYPES.map(w => w.id),
+        labels: workTypeLabels(),
         datasets: [{ data: [412, 268, 198, 231, 139], backgroundColor: D.WORK_TYPES.map(w => w.color), borderWidth: 2, borderColor: t.border }],
       },
       options: { plugins: { legend: { position: "bottom", labels: { boxWidth: 10, font: { size: 10.5 }, usePointStyle: true } } }, cutout: "68%", maintainAspectRatio: false },
@@ -93,15 +96,20 @@
     }));
 
     A.onThemeChange(retheme);
+    window.addEventListener("slclangchange", () => {
+      const wt = charts.find(ch => ch.canvas.id === "chartWorkType");
+      wt.data.labels = workTypeLabels();
+      wt.update("none");
+    });
 
     /* --- Cases requiring attention --- */
     const ATTENTION_ITEMS = [
-      { ref: "SLC-LEG-2026-00128", title: "Federal Environmental Legislation", stage: "Pre-Approved", note: "Requires approval", icon: "bi-hourglass-split", tone: "warning" },
-      { ref: "SLC-LEG-2026-00119", title: "Ratification Review — Bilateral Investment Treaty", stage: "In Progress", note: "Past Proposed Completion Date", icon: "bi-exclamation-triangle-fill", tone: "danger" },
+      { ref: "TRS-AT-2026-95", title: "Federal Environmental Legislation", stage: "Pre-Approved", note: "Requires approval", icon: "bi-hourglass-split", tone: "warning" },
+      { ref: "LEG-LOC-2026-361", title: "Ratification Review — Bilateral Investment Treaty", stage: "In Progress", note: "Past Proposed Completion Date", icon: "bi-exclamation-triangle-fill", tone: "danger" },
       { ref: "SLC-GEN-2026-00061", title: "IT Infrastructure Upgrade Request", stage: "In Progress", note: "Past Proposed Completion Date", icon: "bi-exclamation-triangle-fill", tone: "danger" },
-      { ref: "SLC-LAO-2026-00087", title: "Legal Opinion on PPP Framework", stage: "In Progress", note: "Classified — restricted visibility", icon: "bi-shield-lock-fill", tone: "info" },
-      { ref: "SLC-LEG-2026-00131", title: "Amendment to Local Traffic and Roads Legislation", stage: "Registered", note: "Delayed milestone — 18 days in First Review", icon: "bi-clock-history", tone: "warning" },
-      { ref: "SLC-RP-2026-00033", title: "Official Gazette Issue No. 214", stage: "In Progress", note: "Registration action required", icon: "bi-clipboard-check", tone: "info" },
+      { ref: "LEG-TC-2026-362", title: "Legal Opinion on PPP Framework", stage: "In Progress", note: "Classified — restricted visibility", icon: "bi-shield-lock-fill", tone: "info" },
+      { ref: "LEG-LOC-2026-360", title: "Amendment to Local Traffic and Roads Legislation", stage: "Registered", note: "Delayed milestone — 18 days in First Review", icon: "bi-clock-history", tone: "warning" },
+      { ref: "TRS-AT-2026-94", title: "Official Gazette Issue No. 214", stage: "In Progress", note: "Registration action required", icon: "bi-clipboard-check", tone: "info" },
     ];
     const TONE_CLASS = { warning: "text-warning", danger: "text-danger", info: "text-primary" };
     document.getElementById("attentionList").innerHTML = ATTENTION_ITEMS.map(x => `
@@ -111,7 +119,7 @@
           <div style="font-size:12.3px;font-weight:600;color:var(--slc-text);">${x.ref} <span class="text-muted-soft fw-normal">— ${x.title}</span></div>
           <div style="font-size:11.3px;color:var(--slc-muted);margin-top:2px;">${x.note}</div>
         </div>
-        <span class="badge-status badge-muted">${x.stage}</span>
+        <span class="badge-status badge-muted" data-en="${x.stage}" data-ar="فتح للمعاينة">${x.stage}</span>
       </a>`).join("");
 
     /* --- Pending approvals (capped so this card matches the trend chart's height) --- */
@@ -125,8 +133,10 @@
         <td><span class="badge-status badge-info">${a.stage}</span></td>
         <td>${A.fmtDate(a.submitted)}</td>
         <td>${A.userChip(a.by)}</td>
-        <td><button class="btn btn-sm btn-outline-primary" onclick="SLCApp.demoActionModal('Approval recorded successfully in prototype mode.')">Review</button></td>
+        <td><button class="btn btn-sm btn-outline-primary" onclick="SLCApp.demoActionModal('Approval recorded successfully in prototype mode.')" data-en="Review" data-ar="فتح للمعاينة">Review</button></td>
       </tr>`;
     }).join("");
+
+    A.retranslate();  // JS-rendered rows need the saved language applied
   });
 })();

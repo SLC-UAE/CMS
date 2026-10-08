@@ -25,25 +25,25 @@
   const WORK_TYPES = [
     {
       id: "Legislation",
-      code: "LEG",
+      code: "LEG", ar: "التشريعات",
       color: "#0033A0",
       caseTypes: ["Local Legislations", "Federal Legislations", "Treaties & Conventions"],
     },
     {
       id: "Legal Advice and Opinion",
-      code: "LAO",
+      code: "LAO", ar: "الفتوى والرأي القانوني",
       color: "#107C10",
       caseTypes: ["Legal Advice", "Official Interpretation of Legislation"],
     },
     {
       id: "Translation",
-      code: "TRN",
+      code: "TRN", ar: "ترجمة",
       color: "#8764B8",
       caseTypes: ["Arabic to English Translation", "English to Arabic Translation"],
     },
     {
       id: "General",
-      code: "GEN",
+      code: "GEN", ar: "عامة",
       color: "#6B7280",
       caseTypes: [
         "Human Resource", "Information Technology", "Finance and Admin", "Events",
@@ -54,7 +54,7 @@
     },
     {
       id: "Research and Publications",
-      code: "RP",
+      code: "RP", ar: "البحوث والاصدارات",
       color: "#C239B3",
       caseTypes: ["Official Gazette", "Legislation Publications", "Others"],
     },
@@ -133,7 +133,7 @@
     { id: "u12", name: "Layla Al Qassimi", nameAr: "ليلى القاسمي", role: "Directorate Legal Staff", directorate: "TRN", email: "layla.alqassimi@slc.gov.ae", initials: "LQ", color: "#0288D1" },
   ];
 
-  const CURRENT_USER = { ...USERS[0], titleLine: "Head of Directorate — Legislation Directorate" };
+  const CURRENT_USER = { ...USERS[0], titleLine: "Head of Directorate — Legislation Directorate", nameAr: "أحمد المنصوري", titleLineAr: "إدارة التشريعات – مدير إدارة" };
 
   function userById(id) { return USERS.find(u => u.id === id); }
   function userByName(name) { return USERS.find(u => u.name === name); }
@@ -154,7 +154,7 @@
   /* ---------------------------------------------------------------------- */
   const CASES = [
     {
-      ref: "SLC-LEG-2026-00128", systemNo: "SYS-2026-04512", classified: false,
+      ref: "TRS-AT-2026-95", systemNo: "SYS-2026-04512", classified: false,
       title: "Draft Federal Environmental Protection Legislation",
       titleAr: "مشروع تشريع اتحادي لحماية البيئة",
       workType: "Legislation", caseType: "Federal Legislations",
@@ -169,7 +169,7 @@
       progressPct: 68,
     },
     {
-      ref: "SLC-LAO-2026-00087", systemNo: "SYS-2026-03876", classified: true,
+      ref: "LEG-TC-2026-362", systemNo: "SYS-2026-03876", classified: true,
       title: "Legal Opinion on Public-Private Partnership Framework",
       titleAr: "رأي قانوني حول إطار الشراكة بين القطاعين العام والخاص",
       workType: "Legal Advice and Opinion", caseType: "Legal Advice",
@@ -195,7 +195,7 @@
       requestingEntity: "Legislation Directorate", workSource: "Internal", csd: "2026-08-30", crd: "2026-08-30", rcd: "2026-08-31",
       pcd: "2026-09-27", acd: null, icd: null,
       lastActivity: "2026-09-19", complexity: "Medium",
-      progressPct: 55, relatedCase: "SLC-LEG-2026-00128",
+      progressPct: 55, relatedCase: "TRS-AT-2026-95",
     },
     {
       ref: "SLC-GEN-2026-00052", systemNo: "SYS-2026-02244", classified: false,
@@ -212,7 +212,7 @@
       progressPct: 82,
     },
     {
-      ref: "SLC-LEG-2026-00131", systemNo: "SYS-2026-04601", classified: false,
+      ref: "LEG-LOC-2026-360", systemNo: "SYS-2026-04601", classified: false,
       title: "Amendment to Local Traffic and Roads Legislation",
       titleAr: "تعديل تشريع الطرق والمرور المحلي",
       workType: "Legislation", caseType: "Local Legislations",
@@ -227,7 +227,7 @@
       progressPct: 22,
     },
     {
-      ref: "SLC-LEG-2026-00119", systemNo: "SYS-2026-04120", classified: false,
+      ref: "LEG-LOC-2026-361", systemNo: "SYS-2026-04120", classified: false,
       title: "Ratification Review — Bilateral Investment Treaty",
       titleAr: "مراجعة تصديق — معاهدة الاستثمار الثنائية",
       workType: "Legislation", caseType: "Treaties & Conventions",
@@ -242,7 +242,7 @@
       progressPct: 74, overdue: true,
     },
     {
-      ref: "SLC-RP-2026-00033", systemNo: "SYS-2026-03310", classified: false,
+      ref: "TRS-AT-2026-94", systemNo: "SYS-2026-03310", classified: false,
       title: "Official Gazette Issue No. 214 — Q3 Local Legislations",
       titleAr: "الجريدة الرسمية العدد 214 — تشريعات الربع الثالث",
       workType: "Research and Publications", caseType: "Official Gazette",
@@ -297,7 +297,7 @@
       requestingEntity: "Legal Advice and Opinion Directorate", workSource: "Internal", csd: "2026-09-10", crd: "2026-09-10", rcd: "2026-09-11",
       pcd: "2026-09-24", acd: null, icd: null,
       lastActivity: "2026-09-19", complexity: "Medium",
-      progressPct: 25, relatedCase: "SLC-LAO-2026-00087",
+      progressPct: 25, relatedCase: "LEG-TC-2026-362",
     },
     {
       ref: "SLC-LEG-2026-00073", systemNo: "SYS-2026-03005", classified: false,
@@ -314,7 +314,7 @@
       progressPct: 5, missing: ["Case Receipt Date", "Lead Member", "Administrators"],
     },
     {
-      ref: "SLC-LAO-2026-00102", systemNo: "SYS-2026-04002", classified: true,
+      ref: "LAO-LA-2025-50", systemNo: "SYS-2026-04002", classified: true,
       title: "Legal Advice — Data Protection Compliance for Government Entities",
       titleAr: "استشارة قانونية — الامتثال لحماية البيانات",
       workType: "Legal Advice and Opinion", caseType: "Legal Advice",
@@ -378,19 +378,19 @@
   /*  (CURRENT_USER) sign-off at their current workflow stage.               */
   /* ---------------------------------------------------------------------- */
   const PENDING_APPROVALS = [
-    { ref: "SLC-LEG-2026-00128", stage: "Pre-Closure Approval", submitted: "2026-09-18", by: "u1" },
-    { ref: "SLC-LAO-2026-00087", stage: "Registration Approval", submitted: "2026-09-17", by: "u1" },
-    { ref: "SLC-RP-2026-00033", stage: "Pre-Approval", submitted: "2026-09-16", by: "u1" },
-    { ref: "SLC-LEG-2026-00131", stage: "Registration Approval", submitted: "2026-09-15", by: "u1" },
-    { ref: "SLC-LEG-2026-00119", stage: "Pre-Closure Approval", submitted: "2026-09-14", by: "u1" },
-    { ref: "SLC-LAO-2026-00102", stage: "Pre-Approval", submitted: "2026-09-12", by: "u1" },
+    { ref: "TRS-AT-2026-95", stage: "Pre-Closure Approval", submitted: "2026-09-18", by: "u1" },
+    { ref: "LEG-TC-2026-362", stage: "Registration Approval", submitted: "2026-09-17", by: "u1" },
+    { ref: "TRS-AT-2026-94", stage: "Pre-Approval", submitted: "2026-09-16", by: "u1" },
+    { ref: "LEG-LOC-2026-360", stage: "Registration Approval", submitted: "2026-09-15", by: "u1" },
+    { ref: "LEG-LOC-2026-361", stage: "Pre-Closure Approval", submitted: "2026-09-14", by: "u1" },
+    { ref: "LAO-LA-2025-50", stage: "Pre-Approval", submitted: "2026-09-12", by: "u1" },
   ];
 
   /* ---------------------------------------------------------------------- */
   /*  Case Activities (subset, focused on featured cases)                   */
   /* ---------------------------------------------------------------------- */
   const ACTIVITIES = {
-    "SLC-LEG-2026-00128": [
+    "TRS-AT-2026-95": [
       { date: "2026-09-18 14:22", user: "u2", type: "Legal Review Started", mode: "Manual", desc: "Final review of Article 12 amendments started following comments from Dubai Municipality.", attachments: ["Legal_Review_Notes_v3.docx"], status: "Completed" },
       { date: "2026-09-15 09:05", user: "u12", type: "Translation Requested", mode: "Manual", desc: "Translation of final draft requested (Arabic to English) for Executive Council submission.", attachments: ["Translation_Request_Form.pdf"], status: "In Progress" },
       { date: "2026-09-10 16:40", user: "u8", type: "Comment Added", mode: "Manual", desc: "Added clarification note on penalty clause aligned with Federal Law No. 24 of 1999.", attachments: [], status: "Completed" },
@@ -399,7 +399,7 @@
       { date: "2026-07-30 13:30", user: "u2", type: "Email Sent", mode: "Manual", desc: "Circulated first draft to Technical Office for preliminary comments.", attachments: ["First_Draft_Circulation_Email.msg"], status: "Completed" },
       { date: "2026-01-20 09:00", user: "u4", type: "Case Registered", mode: "Automatic", desc: "Case registration cycle completed and reference number generated.", attachments: [], status: "Completed" },
     ],
-    "SLC-LAO-2026-00087": [
+    "LEG-TC-2026-362": [
       { date: "2026-09-17 15:10", user: "u3", type: "Comment Added", mode: "Manual", desc: "Preliminary position shared with Directorate Legal Staff for internal alignment.", attachments: [], status: "Completed" },
       { date: "2026-09-11 10:20", user: "u8", type: "Document Uploaded", mode: "Manual", desc: "Uploaded relevant legislation references (Federal Law No. 2 of 2015).", attachments: ["Relevant_Legislation_Ref.pdf"], status: "Completed" },
       { date: "2026-08-28 09:45", user: "u3", type: "Task Assigned", mode: "Manual", desc: "Assigned research task on PPP frameworks in comparable jurisdictions to Associate Member.", attachments: [], status: "Completed" },
@@ -503,14 +503,14 @@
   /*  Attachments                                                            */
   /* ---------------------------------------------------------------------- */
   const ATTACHMENTS = {
-    "SLC-LEG-2026-00128": [
+    "TRS-AT-2026-95": [
       { name: "Final Approved Legislation.pdf", type: "PDF", uploadedBy: "u2", date: "2026-09-18", version: "v3.0", status: "Approved", size: "2.4 MB" },
       { name: "Preliminary Report.docx", type: "Word", uploadedBy: "u2", date: "2026-01-25", version: "v1.0", status: "Final", size: "540 KB" },
       { name: "Legal Opinion.pdf", type: "PDF", uploadedBy: "u8", date: "2026-04-12", version: "v1.0", status: "Final", size: "1.1 MB" },
       { name: "Translation Request.pdf", type: "PDF", uploadedBy: "u12", date: "2026-09-15", version: "v1.0", status: "Submitted", size: "320 KB" },
       { name: "Official Gazette Draft.pdf", type: "PDF", uploadedBy: "u10", date: "2026-09-05", version: "v0.2", status: "Draft", size: "1.8 MB" },
     ],
-    "SLC-LAO-2026-00087": [
+    "LEG-TC-2026-362": [
       { name: "Relevant Legislation Ref.pdf", type: "PDF", uploadedBy: "u8", date: "2026-09-11", version: "v1.0", status: "Final", size: "980 KB" },
       { name: "Draft Legal Opinion.docx", type: "Word", uploadedBy: "u3", date: "2026-09-05", version: "v2.1", status: "In Review", size: "410 KB" },
     ],
@@ -526,13 +526,13 @@
   /*  Tasks                                                                  */
   /* ---------------------------------------------------------------------- */
   const TASKS = [
-    { id: "T-1042", title: "Review Article 12 amendments", relatedCase: "SLC-LEG-2026-00128", assignedTo: "u2", assignedBy: "u1", start: "2026-09-15", due: "2026-09-22", priority: "High", status: "In Progress" },
-    { id: "T-1043", title: "Compile PPP framework comparative research", relatedCase: "SLC-LAO-2026-00087", assignedTo: "u8", assignedBy: "u3", start: "2026-09-10", due: "2026-09-20", priority: "High", status: "In Progress" },
+    { id: "T-1042", title: "Review Article 12 amendments", relatedCase: "TRS-AT-2026-95", assignedTo: "u2", assignedBy: "u1", start: "2026-09-15", due: "2026-09-22", priority: "High", status: "In Progress" },
+    { id: "T-1043", title: "Compile PPP framework comparative research", relatedCase: "LEG-TC-2026-362", assignedTo: "u8", assignedBy: "u3", start: "2026-09-10", due: "2026-09-20", priority: "High", status: "In Progress" },
     { id: "T-1044", title: "Proofread first draft translation", relatedCase: "SLC-TRN-2026-00114", assignedTo: "u12", assignedBy: "u6", start: "2026-09-19", due: "2026-09-23", priority: "Medium", status: "New" },
-    { id: "T-1045", title: "Prepare Official Gazette Issue 214 layout", relatedCase: "SLC-RP-2026-00033", assignedTo: "u10", assignedBy: "u9", start: "2026-09-08", due: "2026-09-18", priority: "Medium", status: "Overdue" },
+    { id: "T-1045", title: "Prepare Official Gazette Issue 214 layout", relatedCase: "TRS-AT-2026-94", assignedTo: "u10", assignedBy: "u9", start: "2026-09-08", due: "2026-09-18", priority: "Medium", status: "Overdue" },
     { id: "T-1046", title: "Confirm committee member nominations", relatedCase: "SLC-GEN-2026-00052", assignedTo: "u4", assignedBy: "u9", start: "2026-09-01", due: "2026-09-14", priority: "Low", status: "Completed" },
-    { id: "T-1047", title: "Draft acknowledgement letter to RTA", relatedCase: "SLC-LEG-2026-00131", assignedTo: "u8", assignedBy: "u1", start: "2026-09-16", due: "2026-09-24", priority: "Medium", status: "New" },
-    { id: "T-1048", title: "Coordinate with Ministry of Finance on treaty annex", relatedCase: "SLC-LEG-2026-00119", assignedTo: "u2", assignedBy: "u1", start: "2026-09-05", due: "2026-09-15", priority: "High", status: "Overdue" },
+    { id: "T-1047", title: "Draft acknowledgement letter to RTA", relatedCase: "LEG-LOC-2026-360", assignedTo: "u8", assignedBy: "u1", start: "2026-09-16", due: "2026-09-24", priority: "Medium", status: "New" },
+    { id: "T-1048", title: "Coordinate with Ministry of Finance on treaty annex", relatedCase: "LEG-LOC-2026-361", assignedTo: "u2", assignedBy: "u1", start: "2026-09-05", due: "2026-09-15", priority: "High", status: "Overdue" },
     { id: "T-1049", title: "Review IT infrastructure vendor quotations", relatedCase: "SLC-GEN-2026-00061", assignedTo: "u5", assignedBy: "u9", start: "2026-09-02", due: "2026-09-19", priority: "Low", status: "In Progress" },
   ];
 
@@ -541,21 +541,21 @@
   /* ---------------------------------------------------------------------- */
   const REMINDERS = [
     { id: "R-501", title: "Follow up on translation completion", relatedCase: "SLC-TRN-2026-00114", date: "2026-09-23", time: "09:00", assignedTo: "u12", type: "Case Activity", status: "Upcoming" },
-    { id: "R-502", title: "Executive Council submission deadline approaching", relatedCase: "SLC-LEG-2026-00128", date: "2026-09-28", time: "10:00", assignedTo: "u1", type: "PCD Auto-Reminder", status: "Upcoming" },
-    { id: "R-503", title: "Official Gazette expected publication date", relatedCase: "SLC-RP-2026-00033", date: "2026-09-29", time: "08:30", assignedTo: "u10", type: "PCD Auto-Reminder", status: "Upcoming" },
-    { id: "R-504", title: "Request extension for treaty ratification review", relatedCase: "SLC-LEG-2026-00119", date: "2026-09-21", time: "11:00", assignedTo: "u2", type: "Task Reminder", status: "Due Today" },
-    { id: "R-505", title: "Confirm legal advice sign-off meeting", relatedCase: "SLC-LAO-2026-00087", date: "2026-09-20", time: "14:00", assignedTo: "u3", type: "Manual Reminder", status: "Overdue" },
+    { id: "R-502", title: "Executive Council submission deadline approaching", relatedCase: "TRS-AT-2026-95", date: "2026-09-28", time: "10:00", assignedTo: "u1", type: "PCD Auto-Reminder", status: "Upcoming" },
+    { id: "R-503", title: "Official Gazette expected publication date", relatedCase: "TRS-AT-2026-94", date: "2026-09-29", time: "08:30", assignedTo: "u10", type: "PCD Auto-Reminder", status: "Upcoming" },
+    { id: "R-504", title: "Request extension for treaty ratification review", relatedCase: "LEG-LOC-2026-361", date: "2026-09-21", time: "11:00", assignedTo: "u2", type: "Task Reminder", status: "Due Today" },
+    { id: "R-505", title: "Confirm legal advice sign-off meeting", relatedCase: "LEG-TC-2026-362", date: "2026-09-20", time: "14:00", assignedTo: "u3", type: "Manual Reminder", status: "Overdue" },
   ];
 
   /* ---------------------------------------------------------------------- */
   /*  Notifications                                                          */
   /* ---------------------------------------------------------------------- */
   const NOTIFICATIONS = [
-    { icon: "bi-signpost-split", text: "Case SLC-LEG-2026-00128 milestone updated to Final Review", time: "2 hours ago", unread: true },
+    { icon: "bi-signpost-split", text: "Case TRS-AT-2026-95 milestone updated to Final Review", time: "2 hours ago", unread: true },
     { icon: "bi-translate", text: "Translation case SLC-TRN-2026-00114 draft completed", time: "5 hours ago", unread: true },
     { icon: "bi-exclamation-triangle", text: "3 tasks are overdue and require attention", time: "Yesterday", unread: true },
     { icon: "bi-journal-text", text: "Official Gazette Issue 214 publication approaching (9 days)", time: "Yesterday", unread: false },
-    { icon: "bi-person-plus", text: "You were assigned to case SLC-LEG-2026-00131", time: "2 days ago", unread: false },
+    { icon: "bi-person-plus", text: "You were assigned to case LEG-LOC-2026-360", time: "2 days ago", unread: false },
     { icon: "bi-bell", text: "Reminder due today: Confirm legal advice sign-off meeting", time: "2 days ago", unread: false },
   ];
 
@@ -585,7 +585,7 @@
   const REPORTS_CATALOG = {
     "Case Reports": [
       { id: "rep-work-type", name: "Cases by Classification", desc: "Breakdown of live and closed cases across all classifications.", chart: "doughnut" },
-      { id: "rep-case-type", name: "Cases by Case Type", desc: "Distribution of cases across configured case types.", chart: "bar" },
+      { id: "rep-case-type", name: "Cases by Sub-Classification", desc: "Distribution of cases across configured sub-classifications.", chart: "bar" },
       { id: "rep-directorate", name: "Cases by Directorate", desc: "Directorate-wise caseload comparison.", chart: "bar" },
       { id: "rep-status", name: "Case Status Report", desc: "Live, pending, completed, and closed case distribution.", chart: "doughnut" },
       { id: "rep-milestone", name: "Case Milestone Report", desc: "Current milestone breakdown for all live cases.", chart: "horizontalBar" },

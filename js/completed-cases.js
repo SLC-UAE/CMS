@@ -4,7 +4,7 @@
   const D = window.SLC, A = window.SLCApp;
   const PAGE_SIZE = 8;
   let currentPage = 1;
-  let activeCode = "LEG";
+  let activeCode = "ALL";
   let sortField = null;
   let sortDir = 1;
 
@@ -19,26 +19,29 @@
   function populateFilterOptions() {
     const ctSel = document.getElementById("fCaseType");
     function rebuildCaseTypes() {
-      ctSel.innerHTML = `<option value="">All Case Types</option>`;
-      const types = (activeWorkType() || { caseTypes: [] }).caseTypes;
+      const wt = activeWorkType();
+      // Only the chosen main classification's sub-classifications are offered (like Register Case)
+      ctSel.innerHTML = wt ? `<option value="">All Sub-Classifications</option>` : `<option value="">Select main classification first...</option>`;
+      const types = wt ? wt.caseTypes : [];
       types.forEach(t => ctSel.insertAdjacentHTML("beforeend", `<option value="${t}">${t}</option>`));
     }
     rebuildCaseTypes();
     populateFilterOptions.rebuildCaseTypes = rebuildCaseTypes;
 
-    const dSel = document.getElementById("fDirectorate");
-    D.DIRECTORATES.forEach(d => dSel.insertAdjacentHTML("beforeend", `<option value="${d.id}">${d.name}</option>`));
+    const mcSel = document.getElementById("fMainClass");
+    D.WORK_TYPES.forEach(w => mcSel.insertAdjacentHTML("beforeend", `<option value="${w.code}">${w.id}</option>`));
 
-    const uSel = document.getElementById("fUrgency");
-    ["Low", "Medium", "High", "Very High"].forEach(u => uSel.insertAdjacentHTML("beforeend", `<option value="${u}">${u}</option>`));
+    const lSel = document.getElementById("fLead");
+    Array.from(new Set(D.CASES.filter(c => c.status === "Completed").map(c => c.lead).filter(Boolean)))
+      .forEach(id => lSel.insertAdjacentHTML("beforeend", `<option value="${id}">${D.userById(id).name}</option>`));
   }
 
   function applyFilters(rows) {
     const search = document.getElementById("fSearch").value.trim().toLowerCase();
     const caseType = document.getElementById("fCaseType").value;
-    const directorate = document.getElementById("fDirectorate").value;
-    const urgency = document.getElementById("fUrgency").value;
-    const classifiedOnly = document.getElementById("fClassified").checked;
+    const lead = document.getElementById("fLead").value;
+    const dateFrom = document.getElementById("fDateFrom").value;
+    const dateTo = document.getElementById("fDateTo").value;
     const wt = activeWorkType();
 
     return rows.filter(c => {
@@ -48,15 +51,21 @@
         if (!hay.includes(search)) return false;
       }
       if (caseType && c.caseType !== caseType) return false;
-      if (directorate && c.directorate !== directorate) return false;
-      if (urgency && c.urgency !== urgency) return false;
-      if (classifiedOnly && !c.classified) return false;
+      if (lead && c.lead !== lead) return false;
+      const done = c.acd || c.pcd;
+      if (dateFrom && done && done < dateFrom) return false;
+      if (dateTo && done && done > dateTo) return false;
       return true;
     });
   }
 
   function applySort(rows) {
-    if (!sortField) return rows;
+    if (!sortField) {
+      // "All" tab defaults to latest registered first
+      if (activeCode !== "ALL") return rows;
+      const key = c => c.crd || c.csd || "";
+      return rows.slice().sort((a, b) => key(b).localeCompare(key(a)));
+    }
     return rows.slice().sort((a, b) => {
       let av = a[sortField], bv = b[sortField];
       if (sortField === "lead") { av = av ? D.userById(av).name : ""; bv = bv ? D.userById(bv).name : ""; }
@@ -118,9 +127,9 @@
   function resetFilters() {
     document.getElementById("fSearch").value = "";
     document.getElementById("fCaseType").value = "";
-    document.getElementById("fDirectorate").value = "";
-    document.getElementById("fUrgency").value = "";
-    document.getElementById("fClassified").checked = false;
+    document.getElementById("fLead").value = "";
+    document.getElementById("fDateFrom").value = "";
+    document.getElementById("fDateTo").value = "";
     currentPage = 1;
     render();
   }
@@ -150,11 +159,26 @@
         document.querySelectorAll("#ccClassTabs .tab-btn").forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
         activeCode = btn.getAttribute("data-code");
+        document.getElementById("fMainClass").value = activeCode === "ALL" ? "" : activeCode;
         populateFilterOptions.rebuildCaseTypes();
         document.getElementById("fCaseType").value = "";
         currentPage = 1;
         render();
       });
+    });
+
+    // Main Classification dropdown drives the matching tab (which rebuilds the sub-classification list)
+    document.getElementById("fMainClass").addEventListener("change", function () {
+      const code = this.value || "ALL";
+      const tab = document.querySelector('#ccClassTabs .tab-btn[data-code="' + code + '"]');
+      if (tab) { tab.click(); return; }
+      // No tab for this classification (e.g. Research and Publications): filter without a highlighted tab
+      document.querySelectorAll("#ccClassTabs .tab-btn").forEach(b => b.classList.remove("active"));
+      activeCode = code;
+      populateFilterOptions.rebuildCaseTypes();
+      document.getElementById("fCaseType").value = "";
+      currentPage = 1;
+      render();
     });
 
     document.getElementById("fToggleBtn").addEventListener("click", function () {
@@ -172,7 +196,7 @@
       });
     });
 
-    ["fSearch", "fCaseType", "fDirectorate", "fUrgency", "fClassified"].forEach(id => {
+    ["fSearch", "fCaseType", "fLead", "fDateFrom", "fDateTo"].forEach(id => {
       document.getElementById(id).addEventListener("input", () => { currentPage = 1; render(); });
       document.getElementById(id).addEventListener("change", () => { currentPage = 1; render(); });
     });

@@ -16,12 +16,12 @@
 
   <div class="page-title-row">
     <div>
-      <h1 class="page-title" data-en="My Approvals" data-ar="الموافقات الخاصة بي">My Approvals</h1>
-      <div class="page-subtitle">Cases currently awaiting your sign-off at their current workflow stage.</div>
+      <h1 class="page-title" data-en="My Approvals" data-ar="الاعتمادات">My Approvals</h1>
+      <div class="page-subtitle" data-en="Cases currently awaiting your sign-off at their current workflow stage." data-ar="صفحة المعاملات التي بانتظار الاعتماد للفتح والاغلاق.">Cases currently awaiting your sign-off at their current workflow stage.</div>
     </div>
     <div class="page-title-actions">
       <input type="text" class="form-control form-control-sm" id="fSearch" placeholder="Search ref, title, stage..." style="width:240px;">
-      <button class="btn btn-light border btn-sm" id="fResetBtn"><i class="bi bi-arrow-counterclockwise"></i>Reset</button>
+      <button class="btn btn-light border btn-sm" id="fResetBtn"><i class="bi bi-arrow-counterclockwise"></i><span data-en="Reset" data-ar="تنشيط">Reset</span></button>
     </div>
   </div>
 
@@ -31,12 +31,12 @@
       <table class="table-modern mb-0" id="myApprovalsTable">
         <thead>
           <tr>
-            <th class="sortable" data-sort="ref">Case Ref. No.</th>
-            <th class="sortable" data-sort="title">Case Title</th>
-            <th class="sortable" data-sort="workType">Classification</th>
-            <th class="sortable" data-sort="stage">Approval Stage</th>
-            <th class="sortable" data-sort="submitted">Submitted</th>
-            <th class="sortable" data-sort="by">Pending With</th>
+            <th class="sortable" data-sort="ref" data-en="Case Ref. No." data-ar="المرجع">Case Ref. No.</th>
+            <th class="sortable" data-sort="title" data-en="Case Title" data-ar="عنوان المعاملة">Case Title</th>
+            <th class="sortable" data-sort="workType" data-en="Classification" data-ar="التصنيف الأساسي">Classification</th>
+            <th class="sortable" data-sort="stage" data-en="Approval Stage" data-ar="الحالة">Approval Stage</th>
+            <th class="sortable" data-sort="submitted" data-en="Submitted" data-ar="تاريخ">Submitted</th>
+            <th class="sortable" data-sort="by" data-en="Pending With" data-ar="عالقة لدى">Pending With</th>
             <th></th>
           </tr>
         </thead>

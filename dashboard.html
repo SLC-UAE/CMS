@@ -16,12 +16,12 @@
 
   <div class="page-title-row">
     <div>
-      <h1 class="page-title" data-en="Executive Dashboard" data-ar="لوحة المعلومات التنفيذية">Executive Dashboard</h1>
-      <div class="page-subtitle">Welcome back, Ahmed. Here is what's happening across SLC directorates today, 21 September 2026.</div>
+      <h1 class="page-title" data-en="Executive Dashboard" data-ar="لوحة المعلومات">Executive Dashboard</h1>
+      <div class="page-subtitle" data-en="Welcome back, Ahmed. Here is what's happening across SLC directorates today, 21 September 2026." data-ar="أهلا بك، أحمد. إليكم مستجدات النظام بتاريخ 12 سبتمبر 2026">Welcome back, Ahmed. Here is what's happening across SLC directorates today, 21 September 2026.</div>
     </div>
     <div class="page-title-actions">
       <div class="dropdown">
-        <button class="btn btn-light border dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-download"></i>Export</button>
+        <button class="btn btn-light border dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-download"></i><span data-en="Export" data-ar="تصدير">Export</span></button>
         <ul class="dropdown-menu dropdown-menu-end">
           <li><a class="dropdown-item" href="#" onclick="event.preventDefault();SLCApp.toast('Report exported successfully – Demo Mode');"><i class="bi bi-file-earmark-excel me-2" style="color:#107C10;"></i>Export to Excel</a></li>
           <li><a class="dropdown-item" href="#" onclick="event.preventDefault();SLCApp.toast('Report exported successfully – Demo Mode');"><i class="bi bi-file-earmark-pdf me-2" style="color:#B91C1C;"></i>Export to PDF</a></li>
@@ -37,7 +37,7 @@
     <div class="col-12 col-lg-4">
       <div class="section-card h-100">
         <div class="sc-header">
-          <span>Monthly Case Trend</span>
+          <span data-en="Monthly Case Trend" data-ar="اتجاه المعاملات الشهري">Monthly Case Trend</span>
         </div>
         <div class="sc-body"><div class="chart-box"><canvas id="chartTrend"></canvas></div></div>
       </div>
@@ -45,12 +45,12 @@
     <div class="col-12 col-lg-8">
       <div class="section-card h-100">
         <div class="sc-header">
-          <span>Pending Approvals</span>
-          <a href="my-approvals.html" class="text-primary" style="font-size:12.3px;font-weight:600;">View All<i class="bi bi-arrow-right ms-1"></i></a>
+          <span data-en="Pending Approvals" data-ar="اعتمادات قيد العمل">Pending Approvals</span>
+          <a href="my-approvals.html" class="text-primary" style="font-size:12.3px;font-weight:600;"><span data-en="View All" data-ar="عرض الكل">View All</span><i class="bi bi-arrow-right ms-1"></i></a>
         </div>
         <div class="table-scroll">
           <table class="table-modern mb-0" id="approvalsTable">
-            <thead><tr><th>Case Ref.</th><th>Case Title</th><th>Classification</th><th>Approval Stage</th><th>Submitted</th><th>Pending With</th><th></th></tr></thead>
+            <thead><tr><th data-en="Case Ref." data-ar="المرجع">Case Ref.</th><th data-en="Case Title" data-ar="عنوان المعاملة">Case Title</th><th data-en="Classification" data-ar="التصنيف الأساسي">Classification</th><th data-en="Approval Stage" data-ar="الحالة">Approval Stage</th><th data-en="Submitted" data-ar="تاريخ">Submitted</th><th data-en="Pending With" data-ar="عالقة لدى">Pending With</th><th></th></tr></thead>
             <tbody></tbody>
           </table>
         </div>
@@ -62,19 +62,19 @@
   <div class="row g-3 mt-1">
     <div class="col-12 col-sm-6 col-lg-4">
       <div class="section-card h-100">
-        <div class="sc-header"><span>Cases by Classification</span></div>
+        <div class="sc-header"><span data-en="Cases by Classification" data-ar="معاملات حسب التصنيف الأساسي">Cases by Classification</span></div>
         <div class="sc-body"><div class="chart-box sm"><canvas id="chartWorkType"></canvas></div></div>
       </div>
     </div>
     <div class="col-12 col-sm-6 col-lg-4">
       <div class="section-card h-100">
-        <div class="sc-header"><span>Cases by Directorate</span></div>
+        <div class="sc-header"><span data-en="Cases by Directorate" data-ar="معاملات حسب التصنيف الأساسي">Cases by Directorate</span></div>
         <div class="sc-body"><div class="chart-box sm"><canvas id="chartDirectorate"></canvas></div></div>
       </div>
     </div>
     <div class="col-12 col-sm-12 col-lg-4">
       <div class="section-card h-100">
-        <div class="sc-header"><span>Case Aging</span></div>
+        <div class="sc-header"><span data-en="Case Aging" data-ar="عمر المعاملات">Case Aging</span></div>
         <div class="sc-body"><div class="chart-box sm"><canvas id="chartAging"></canvas></div></div>
       </div>
     </div>
@@ -83,13 +83,13 @@
   <div class="row g-3 mt-1">
     <div class="col-md-6">
       <div class="section-card h-100">
-        <div class="sc-header"><span>Case Completion Performance</span><span class="text-muted-soft" style="font-size:11.5px;font-weight:500;">Target vs. Completed — within/beyond SLA</span></div>
+        <div class="sc-header"><span data-en="Case Completion Performance" data-ar="أداء إغلاق المعاملات حسب الشهر">Case Completion Performance</span><span class="text-muted-soft" style="font-size:11.5px;font-weight:500;">Target vs. Completed — within/beyond SLA</span></div>
         <div class="sc-body"><div class="chart-box sm"><canvas id="chartCompletion"></canvas></div></div>
       </div>
     </div>
     <div class="col-md-6">
       <div class="section-card h-100">
-        <div class="sc-header"><span>Cases Requiring Attention</span></div>
+        <div class="sc-header"><span data-en="Cases Requiring Attention" data-ar="آخر المستجدات في معاملاتي">Cases Requiring Attention</span></div>
         <div class="sc-body pt-2" id="attentionList" style="max-height:236px;overflow-y:auto;"></div>
       </div>
     </div>

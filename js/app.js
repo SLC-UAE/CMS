@@ -11,12 +11,12 @@
   /* ------------------------------------------------------------------ */
   const NAV = [
     { key: "dashboard", label: "Dashboard", labelAr: "لوحة المعلومات", href: "dashboard.html" },
-    { key: "my-approvals", label: "My Approvals", labelAr: "الموافقات الخاصة بي", href: "my-approvals.html" },
-    { key: "new-case", label: "Register Case", labelAr: "تسجيل قضية", href: "new-case.html" },
-    { key: "live-cases", label: "Live Cases", labelAr: "القضايا النشطة", href: "live-cases.html" },
-    { key: "completed-cases", label: "Completed Cases", labelAr: "القضايا المكتملة", href: "completed-cases.html" },
+    { key: "my-approvals", label: "My Approvals", labelAr: "الاعتمادات", href: "my-approvals.html" },
+    { key: "new-case", label: "Register Case", labelAr: "تسجيل معاملة", href: "new-case.html" },
+    { key: "live-cases", label: "Live Cases", labelAr: "معاملات الجارية", href: "live-cases.html" },
+    { key: "completed-cases", label: "Completed Cases", labelAr: "معاملات مغلقة", href: "completed-cases.html" },
     {
-      key: "reports", label: "Reports", labelAr: "التقارير", href: "reports.html",
+      key: "reports", label: "Reports", labelAr: "تقارير", href: "reports.html",
       matchKeys: ["reports"],
       dropdown: [
         { label: "Case Summary Report", href: "reports.html", icon: "bi-clipboard-data" },
@@ -38,8 +38,8 @@
       dropdown: [
         { label: "User Management", href: "management.html#sec-users", icon: "bi-people" },
         { label: "Roles & Permissions", href: "roles-permissions.html", icon: "bi-shield-lock" },
-        { label: "Work Type Masters", href: "management.html#sec-work-types", icon: "bi-diagram-3" },
-        { label: "Case Type Masters", href: "management.html#sec-case-types", icon: "bi-tags" },
+        { label: "Main Classification Masters", href: "management.html#sec-work-types", icon: "bi-diagram-3" },
+        { label: "Sub-Classification Masters", href: "management.html#sec-case-types", icon: "bi-tags" },
         { label: "Milestone Masters", href: "management.html#sec-milestones", icon: "bi-flag" },
         { label: "Entity Masters", href: "management.html#sec-entities", icon: "bi-building" },
         { label: "Expert Masters", href: "management.html#sec-experts", icon: "bi-mortarboard" },
@@ -113,7 +113,7 @@
         <img src="assets/Tadweenlogo1.png" alt="Tadween Portal" class="app-brand-logo" width="140" height="60">
       </div>
       <div class="app-brand-row app-brand-row-utility">
-        <div class="app-brand-name" style="font-weight:700;font-size:14px;color:var(--slc-text);">Case Management System &ndash; Tadween Portal</div>
+        <div class="app-brand-name" data-en="Case Management System – Tadween Portal" data-ar="نظام تدوين لإدارة المعاملات" style="font-weight:700;font-size:14px;color:var(--slc-text);">Case Management System &ndash; Tadween Portal</div>
         <div class="header-actions">
           <div class="lang-switch">
             <button id="langEnBtn" class="active">EN</button>
@@ -137,8 +137,8 @@
             <div class="header-user" data-bs-toggle="dropdown">
               ${avatarHtml(u)}
               <div class="header-user-text d-none d-md-block">
-                <div class="name">${u.name}</div>
-                <div class="role">${u.titleLine}</div>
+                <div class="name" data-en="${u.name}" data-ar="${u.nameAr || u.name}">${u.name}</div>
+                <div class="role" data-en="${u.titleLine}" data-ar="${u.titleLineAr || u.titleLine}">${u.titleLine}</div>
               </div>
               <i class="bi bi-chevron-down ms-1" style="font-size:10px;color:var(--slc-muted)"></i>
           </div>
@@ -186,7 +186,7 @@
       <div class="topnav-search">
         <div class="header-search">
           <i class="bi bi-search"></i>
-          <input type="text" id="globalHeaderSearch" placeholder="Search cases, documents, entities..." autocomplete="off">
+          <input type="text" id="globalHeaderSearch" placeholder="Quick Search" autocomplete="off">
         </div>
       </div>
     </div>`;
@@ -209,8 +209,12 @@
     let html = `<div class="breadcrumb-row"><a href="dashboard.html"><i class="bi bi-house"></i></a>`;
     trail.forEach((t, i) => {
       html += `<span class="sep">/</span>`;
-      if (i === trail.length - 1) html += `<span class="current">${t.label}</span>`;
-      else html += `<a href="${t.href}">${t.label}</a>`;
+      // Arabic: explicit labelAr, else the matching top-nav item's Arabic label
+      const nav = NAV.find(n => n.label === t.label);
+      const ar = t.labelAr || (nav && nav.labelAr);
+      const attrs = ar ? ` data-en="${t.label}" data-ar="${ar}"` : "";
+      if (i === trail.length - 1) html += `<span class="current"${attrs}>${t.label}</span>`;
+      else html += `<a href="${t.href}"${attrs}>${t.label}</a>`;
     });
     html += `</div>`;
     return html;
@@ -271,14 +275,28 @@
   /* ------------------------------------------------------------------ */
   /* Language / RTL toggle (demo)                                        */
   /* ------------------------------------------------------------------ */
+  /* Re-applies the saved language to every [data-en]/[data-ar] element — call again
+     after rendering content with JS (no toast, no direction change). */
+  function retranslate() {
+    const ar = localStorage.getItem("slc_lang") === "ar";
+    document.querySelectorAll("[data-en]").forEach(el => {
+      const val = ar ? el.getAttribute("data-ar") : el.getAttribute("data-en");
+      if (val) el.textContent = val;
+    });
+    // Placeholders: data-en-ph / data-ar-ph
+    document.querySelectorAll("[data-ar-ph]").forEach(el => {
+      el.placeholder = ar ? el.getAttribute("data-ar-ph") : el.getAttribute("data-en-ph");
+    });
+    const gs = document.getElementById("globalHeaderSearch");
+    if (gs) gs.placeholder = ar ? "البحث السريع" : "Quick Search";
+  }
+
   function applyLang(lang) {
     localStorage.setItem("slc_lang", lang);
     document.documentElement.setAttribute("lang", lang === "ar" ? "ar" : "en");
     document.documentElement.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
-    document.querySelectorAll("[data-en]").forEach(el => {
-      const val = lang === "ar" ? el.getAttribute("data-ar") : el.getAttribute("data-en");
-      if (val) el.textContent = val;
-    });
+    retranslate();
+    window.dispatchEvent(new CustomEvent("slclangchange", { detail: { lang } }));
     const enBtn = document.getElementById("langEnBtn"), arBtn = document.getElementById("langArBtn");
     if (enBtn && arBtn) {
       enBtn.classList.toggle("active", lang !== "ar");
@@ -476,7 +494,7 @@
   }
 
   global.SLCApp = {
-    NAV, renderShell, toast, demoAction, demoActionModal, applyLang, avatarHtml,
+    NAV, renderShell, toast, demoAction, demoActionModal, applyLang, retranslate, avatarHtml,
     urgencyBadge, milestoneBadge, classifiedFlag, fmtDate, userChip,
     applyTheme, currentTheme, chartTheme, onThemeChange,
     scrollToSection, initTabs, toggleAccessibilityMode, enableTableSort,

@@ -16,7 +16,7 @@
 
   <div class="page-title-row">
     <div>
-      <h1 class="page-title" data-en="Completed Cases" data-ar="القضايا المكتملة">Completed Cases</h1>
+      <h1 class="page-title" data-en="Completed Cases" data-ar="معاملات مغلقة">Completed Cases</h1>
       <div class="page-subtitle">All cases that have completed the case workflow and reached Closed status.</div>
     </div>
     <div class="page-title-actions">
@@ -34,22 +34,24 @@
     <div class="filter-bar">
       <div class="row g-2 align-items-end">
         <div class="col-lg-2 col-md-3">
-          <label>Case Type</label>
-          <select class="form-select form-select-sm" id="fCaseType"><option value="">All Case Types</option></select>
+          <label>Main Classification</label>
+          <select class="form-select form-select-sm" id="fMainClass"><option value="">All Main Classifications</option></select>
         </div>
         <div class="col-lg-2 col-md-3">
-          <label>Directorate</label>
-          <select class="form-select form-select-sm" id="fDirectorate"><option value="">All Directorates</option></select>
+          <label>Sub-Classification</label>
+          <select class="form-select form-select-sm" id="fCaseType"><option value="">Select main classification first...</option></select>
         </div>
         <div class="col-lg-2 col-md-3">
-          <label>Urgency</label>
-          <select class="form-select form-select-sm" id="fUrgency"><option value="">All</option></select>
+          <label>Team Leader</label>
+          <select class="form-select form-select-sm" id="fLead"><option value="">All Team Leaders</option></select>
         </div>
-        <div class="col-lg-3 col-md-4 d-flex align-items-center">
-          <div class="form-check form-switch mb-0">
-            <input class="form-check-input" type="checkbox" id="fClassified">
-            <label class="form-check-label" for="fClassified" style="font-size:12.3px;">Classified cases only</label>
-          </div>
+        <div class="col-lg-2 col-md-3">
+          <label>Duration From</label>
+          <input type="date" class="form-control form-control-sm" id="fDateFrom">
+        </div>
+        <div class="col-lg-2 col-md-3">
+          <label>Duration To</label>
+          <input type="date" class="form-control form-control-sm" id="fDateTo">
         </div>
       </div>
     </div>
@@ -57,10 +59,11 @@
 
   <!-- Classification tabs -->
   <div class="tab-nav" id="ccClassTabs">
-    <button type="button" class="tab-btn active" data-code="LEG">Legislation (LEG)</button>
-    <button type="button" class="tab-btn" data-code="LAO">Legal Advice &amp; Opinion (LAO)</button>
-    <button type="button" class="tab-btn" data-code="TRN">Translation (TRN)</button>
-    <button type="button" class="tab-btn" data-code="GEN">General (GEN)</button>
+    <button type="button" class="tab-btn active" data-code="ALL" data-en="All" data-ar="الكل">All</button>
+    <button type="button" class="tab-btn" data-code="LEG" data-en="Legislation (LEG)" data-ar="التشريعات">Legislation (LEG)</button>
+    <button type="button" class="tab-btn" data-code="LAO" data-en="Legal Advice &amp; Opinion (LAO)" data-ar="الفتوى والرأي القانوني">Legal Advice &amp; Opinion (LAO)</button>
+    <button type="button" class="tab-btn" data-code="TRN" data-en="Translation (TRN)" data-ar="الترجمة">Translation (TRN)</button>
+    <button type="button" class="tab-btn" data-code="GEN" data-en="General (GEN)" data-ar="العامة">General (GEN)</button>
   </div>
 
   <!-- Table -->
@@ -69,13 +72,13 @@
       <table class="table-modern mb-0" id="completedCasesTable">
         <thead>
           <tr>
-            <th class="sortable" data-sort="ref">Case Ref. No.</th>
-            <th class="sortable" data-sort="title">Case Title</th>
-            <th class="sortable" data-sort="workType">Work Type</th>
-            <th class="sortable" data-sort="requestingEntity">Requesting Entity</th>
-            <th class="sortable" data-sort="lead">Lead Member</th>
-            <th class="sortable" data-sort="pcd">Proposed Completion</th>
-            <th class="sortable" data-sort="lastActivity">Last Activity</th>
+            <th class="sortable" data-sort="ref" data-en="Case Ref. No." data-ar="المرجع">Case Ref. No.</th>
+            <th class="sortable" data-sort="title" data-en="Case Title" data-ar="عنوان المعاملة">Case Title</th>
+            <th class="sortable" data-sort="workType" data-en="Main Classification" data-ar="التصنيف الأساسي">Main Classification</th>
+            <th class="sortable" data-sort="requestingEntity" data-en="Requesting Entity" data-ar="الجهة الحكومية">Requesting Entity</th>
+            <th class="sortable" data-sort="lead" data-en="Lead Member" data-ar="قائد المعاملة">Lead Member</th>
+            <th class="sortable" data-sort="pcd" data-en="Proposed Completion" data-ar="موعد الانجاز">Proposed Completion</th>
+            <th class="sortable" data-sort="lastActivity" data-en="Last Activity" data-ar="أخر تحديث">Last Activity</th>
             <th></th>
           </tr>
         </thead>

@@ -35,12 +35,12 @@
 
   <div class="search-hero">
     <div class="search-hero-inner">
-      <h1>Database Search</h1>
+      <h1 data-en="Database Search" data-ar="بحث قاعدة البيانات الشاملة">Database Search</h1>
       <p>Search across all SLC cases, documents, activities and entities.</p>
       <div class="search-hero-box">
         <i class="bi bi-search"></i>
-        <input type="text" id="heroSearchInput" placeholder="Search by case reference, title, entity, keyword...">
-        <button class="btn btn-primary" id="heroSearchBtn"><i class="bi bi-search"></i>Search</button>
+        <input type="text" id="heroSearchInput" placeholder="Search by case reference, title, entity, keyword..." data-en-ph="Search by case reference, title, entity, keyword..." data-ar-ph="البحث عن طريق عنوان المعاملة، المرجع، إلخ">
+        <button class="btn btn-primary" id="heroSearchBtn"><i class="bi bi-search"></i><span data-en="Search" data-ar="بحث">Search</span></button>
       </div>
     </div>
   </div>
@@ -54,43 +54,43 @@
       </div>
       <div class="row g-2">
         <div class="col-md-3">
-          <label>Case Ref. No.</label>
-          <input type="text" class="form-control" id="fRef" placeholder="e.g. SLC-LEG-2026-00128">
+          <label data-en="Case Ref. No." data-ar="المرجع">Case Ref. No.</label>
+          <input type="text" class="form-control" id="fRef" placeholder="e.g. TRS-AT-2026-95">
         </div>
         <div class="col-md-3">
-          <label>Case Title</label>
+          <label data-en="Case Title" data-ar="عنوان المعاملة">Case Title</label>
           <input type="text" class="form-control" id="fTitle" placeholder="Keyword in title">
         </div>
         <div class="col-md-3">
-          <label>Work Type</label>
-          <select class="form-select" id="fWorkType"><option value="">All Work Types</option></select>
+          <label data-en="Main Classification" data-ar="التصنيف الرئيسي">Main Classification</label>
+          <select class="form-select" id="fWorkType"><option value="">All Main Classifications</option></select>
         </div>
         <div class="col-md-3">
-          <label>Case Type</label>
-          <select class="form-select" id="fCaseType"><option value="">All Case Types</option></select>
+          <label data-en="Sub-Classification" data-ar="التصنيف الفرعي">Sub-Classification</label>
+          <select class="form-select" id="fCaseType"><option value="">All Sub-Classifications</option></select>
         </div>
         <div class="col-md-3">
-          <label>Requesting Entity</label>
+          <label data-en="Requesting Entity" data-ar="الجهة الحكومية">Requesting Entity</label>
           <select class="form-select" id="fEntity"><option value="">All Entities</option></select>
         </div>
         <div class="col-md-3">
-          <label>Case Activities Keyword</label>
+          <label data-en="Case Activities Keyword" data-ar="كلمات مفتاحية">Case Activities Keyword</label>
           <input type="text" class="form-control" id="fActivity" placeholder="e.g. translation, review">
         </div>
         <div class="col-md-3">
-          <label>Documents Keyword</label>
+          <label data-en="Documents Keyword" data-ar="بحث المرفقات">Documents Keyword</label>
           <input type="text" class="form-control" id="fDoc" placeholder="e.g. draft, gazette">
         </div>
         <div class="col-md-3">
-          <label>Team Members</label>
+          <label data-en="Team Members" data-ar="عضو فريق">Team Members</label>
           <select class="form-select" id="fTeam"><option value="">Any Team Member</option></select>
         </div>
         <div class="col-md-3">
-          <label>Old Reference No.</label>
+          <label data-en="Old Reference No." data-ar="المرجع القديم">Old Reference No.</label>
           <input type="text" class="form-control" id="fOldRef" placeholder="Not tracked for pre-migration cases">
         </div>
         <div class="col-md-3 d-flex align-items-end">
-          <button class="btn btn-primary w-100" id="runSearchBtn"><i class="bi bi-search"></i>Search</button>
+          <button class="btn btn-primary w-100" id="runSearchBtn"><i class="bi bi-search"></i><span data-en="Search" data-ar="بحث">Search</span></button>
         </div>
       </div>
     </div>
@@ -107,14 +107,13 @@
         <table class="table-modern mb-0" id="resultsTable">
           <thead>
             <tr>
-              <th class="sortable" data-sort="ref">Case Ref.</th>
-              <th class="sortable" data-sort="title">Title</th>
-              <th class="sortable" data-sort="workType">Work Type / Case Type</th>
-              <th class="sortable" data-sort="requestingEntity">Requesting Entity</th>
-              <th class="sortable" data-sort="milestone">Current Workflow Stage</th>
-              <th class="sortable" data-sort="urgency">Urgency</th>
-              <th class="sortable" data-sort="pcd">PCD</th>
-              <th class="sortable" data-sort="status">Status</th>
+              <th class="sortable" data-sort="ref" data-en="Case Ref." data-ar="المرجع">Case Ref.</th>
+              <th class="sortable" data-sort="title" data-en="Title" data-ar="عنوان المعاملة">Title</th>
+              <th class="sortable" data-sort="workType" data-en="Main Classification / Sub-Classification" data-ar="التصنيف الأساسي">Main Classification / Sub-Classification</th>
+              <th class="sortable" data-sort="requestingEntity" data-en="Requesting Entity" data-ar="الجهة الحكومية">Requesting Entity</th>
+              <th class="sortable" data-sort="milestone" data-en="Current Workflow Stage" data-ar="مرحلة المعاملة">Current Workflow Stage</th>
+              <th class="sortable" data-sort="pcd" data-en="PCD" data-ar="موعد الانجاز">PCD</th>
+              <th class="sortable" data-sort="status" data-en="Status" data-ar="الحالة">Status</th>
             </tr>
           </thead>
           <tbody></tbody>

@@ -5,7 +5,24 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     A.renderShell("new-case", [{ label: "Register Case" }]);
-    A.initTabs("#newCaseTabs", "#newCasePanels");
+
+    // Accordion: sections toggle independently
+    function setSection(item, open) {
+      item.classList.toggle("open", open);
+      item.querySelector(".acc-head").setAttribute("aria-expanded", open);
+    }
+    document.querySelectorAll("#newCaseAccordion .acc-head").forEach(h =>
+      h.addEventListener("click", () => setSection(h.parentElement, !h.parentElement.classList.contains("open"))));
+
+    // Case Start Date: defaults to today; only 3 days can be picked (today, tomorrow, day after)
+    const csd = document.getElementById("fCsd");
+    const iso = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+    const now = new Date();
+    const today = iso(now);
+    csd.min = today;
+    csd.max = iso(new Date(now.getFullYear(), now.getMonth(), now.getDate() + 2));
+    csd.defaultValue = today;  // so Reset restores today
+    csd.value = today;
 
     // Work type options
     const wtSel = document.getElementById("fWorkType");
@@ -31,19 +48,20 @@
       const ctSel = document.getElementById("fCaseType");
       ctSel.innerHTML = "";
       if (!wtObj) {
-        ctSel.innerHTML = `<option value="">Select work type first...</option>`;
+        ctSel.innerHTML = `<option value="">Select main classification first...</option>`;
         return;
       }
-      ctSel.insertAdjacentHTML("beforeend", `<option value="">Select case type...</option>`);
+      ctSel.insertAdjacentHTML("beforeend", `<option value="">Select sub-classification...</option>`);
       wtObj.caseTypes.forEach(ct => ctSel.insertAdjacentHTML("beforeend", `<option>${ct}</option>`));
     };
 
     function validate(forRegister) {
       const errors = [];
-      if (!wtSel.value) errors.push("Work Type is required.");
-      if (!document.getElementById("fCaseType").value) errors.push("Case Type is required.");
+      if (!wtSel.value) errors.push("Main Classification is required.");
+      if (!document.getElementById("fCaseType").value) errors.push("Sub-Classification is required.");
       const title = document.querySelectorAll('input[placeholder="Enter case title..."]')[0];
       if (!title.value.trim()) errors.push("Case Title is required.");
+      if (!document.getElementById("fPcd").value) errors.push("Proposed Completion Date (PCD) is required.");
       if (forRegister) {
         if (!document.getElementById("fHod").value) errors.push("Head of Directorate is required to register the case.");
         if (!document.getElementById("fLead").value) errors.push("Lead Member is required to register the case.");
@@ -66,16 +84,19 @@
       box.scrollIntoView({ behavior: "smooth", block: "center" });
     }
 
-    document.getElementById("btnSave").addEventListener("click", function () {
-      const errors = validate(false);
-      if (errors.length) { showAlert(errors); return; }
-      showAlert(null, "Case saved successfully.");
-      A.toast("Case saved successfully.");
-    });
-
     document.getElementById("btnSaveRegister").addEventListener("click", function () {
       const errors = validate(true);
-      if (errors.length) { showAlert(errors); return; }
+      if (errors.length) {
+        // Expand any collapsed section containing an empty required field
+        document.querySelectorAll("#newCaseAccordion .acc-item").forEach(item => {
+          const missing = Array.from(item.querySelectorAll(".form-label-req")).some(l => {
+            const f = l.nextElementSibling;
+            return f && !f.value.trim();
+          });
+          if (missing) setSection(item, true);
+        });
+        showAlert(errors); return;
+      }
       const ref = "SLC-" + (D.WORK_TYPES.find(w => w.id === wtSel.value) || { code: "GEN" }).code + "-2026-00" + Math.floor(100 + Math.random() * 800);
       showAlert(null, `Case ${ref} registered successfully.`);
       A.demoActionModal(`Case ${ref} registered successfully.`);

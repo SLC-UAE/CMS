@@ -15,7 +15,7 @@
     A.initTabs("#cwTabs", "#cwPanels");
 
     const params = new URLSearchParams(window.location.search);
-    const ref = params.get("ref") || "SLC-LEG-2026-00128";
+    const ref = params.get("ref") || "TRS-AT-2026-95";
     const c = D.caseByRef(ref) || D.CASES[0];
     const hod = D.userById(c.hod);
     const lead = c.lead ? D.userById(c.lead) : null;
@@ -83,8 +83,8 @@
         ${fieldRow("Case Start Date (CSD)", A.fmtDate(c.csd))}
         ${fieldRow("Case Registration Completed Date", A.fmtDate(c.rcd))}
         ${fieldRow("Registered By", "Sara Al Mazrouei")}
-        ${fieldRow("Work Type", c.workType)}
-        ${fieldRow("Case Type", c.caseType)}
+        ${fieldRow("Main Classification", c.workType)}
+        ${fieldRow("Sub-Classification", c.caseType)}
         ${fieldRow("Urgency", c.urgency)}
         ${fieldRow("Requesting Entity Type", "Government Entity")}
         ${fieldRow("Requesting Entity Name", c.requestingEntity)}

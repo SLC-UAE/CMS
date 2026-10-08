@@ -4,7 +4,7 @@
   const D = window.SLC, A = window.SLCApp;
   const PAGE_SIZE = 8;
   let currentPage = 1;
-  let activeCode = "LEG";
+  let activeCode = "ALL";
   let sortField = null;
   let sortDir = 1;
 
@@ -19,19 +19,21 @@
   function populateFilterOptions() {
     const ctSel = document.getElementById("fCaseType");
     function rebuildCaseTypes() {
-      ctSel.innerHTML = `<option value="">All Case Types</option>`;
-      const types = (activeWorkType() || { caseTypes: [] }).caseTypes;
+      const wt = activeWorkType();
+      // Only the chosen main classification's sub-classifications are offered (like Register Case)
+      ctSel.innerHTML = wt ? `<option value="">All Sub-Classifications</option>` : `<option value="">Select main classification first...</option>`;
+      const types = wt ? wt.caseTypes : [];
       types.forEach(t => ctSel.insertAdjacentHTML("beforeend", `<option value="${t}">${t}</option>`));
     }
     rebuildCaseTypes();
     populateFilterOptions.rebuildCaseTypes = rebuildCaseTypes;
 
-    const dSel = document.getElementById("fDirectorate");
-    D.DIRECTORATES.forEach(d => dSel.insertAdjacentHTML("beforeend", `<option value="${d.id}">${d.name}</option>`));
+    const mcSel = document.getElementById("fMainClass");
+    D.WORK_TYPES.forEach(w => mcSel.insertAdjacentHTML("beforeend", `<option value="${w.code}">${w.id}</option>`));
 
-    const uSel = document.getElementById("fUrgency");
-    ["Low", "Medium", "High", "Very High"].forEach(u => uSel.insertAdjacentHTML("beforeend", `<option value="${u}">${u}</option>`));
-    uSel.insertAdjacentHTML("beforeend", `<option value="High,Very High">High &amp; Very High</option>`);
+    const lSel = document.getElementById("fLead");
+    Array.from(new Set(liveCases().map(c => c.lead).filter(Boolean)))
+      .forEach(id => lSel.insertAdjacentHTML("beforeend", `<option value="${id}">${D.userById(id).name}</option>`));
 
     const mSel = document.getElementById("fMilestone");
     const usedMilestones = Array.from(new Set(liveCases().map(c => c.milestone)));
@@ -42,13 +44,10 @@
   function applyFilters(rows) {
     const search = document.getElementById("fSearch").value.trim().toLowerCase();
     const caseType = document.getElementById("fCaseType").value;
-    const directorate = document.getElementById("fDirectorate").value;
-    const urgency = document.getElementById("fUrgency").value;
+    const lead = document.getElementById("fLead").value;
     const milestone = document.getElementById("fMilestone").value;
     const dateFrom = document.getElementById("fDateFrom").value;
     const dateTo = document.getElementById("fDateTo").value;
-    const classifiedOnly = document.getElementById("fClassified").checked;
-    const overdueOnly = document.getElementById("fOverdue").checked;
     const wt = activeWorkType();
 
     return rows.filter(c => {
@@ -58,11 +57,8 @@
         if (!hay.includes(search)) return false;
       }
       if (caseType && c.caseType !== caseType) return false;
-      if (directorate && c.directorate !== directorate) return false;
-      if (urgency && !urgency.split(",").includes(c.urgency)) return false;
+      if (lead && c.lead !== lead) return false;
       if (milestone && c.milestone !== milestone) return false;
-      if (classifiedOnly && !c.classified) return false;
-      if (overdueOnly && !c.overdue) return false;
       if (dateFrom && c.pcd && c.pcd < dateFrom) return false;
       if (dateTo && c.pcd && c.pcd > dateTo) return false;
       return true;
@@ -70,7 +66,12 @@
   }
 
   function applySort(rows) {
-    if (!sortField) return rows;
+    if (!sortField) {
+      // "All" tab defaults to latest registered first
+      if (activeCode !== "ALL") return rows;
+      const key = c => c.crd || c.csd || "";
+      return rows.slice().sort((a, b) => key(b).localeCompare(key(a)));
+    }
     const sorted = rows.slice().sort((a, b) => {
       let av = a[sortField], bv = b[sortField];
       if (sortField === "lead") { av = av ? D.userById(av).name : ""; bv = bv ? D.userById(bv).name : ""; }
@@ -152,47 +153,46 @@
     document.getElementById("lcResultCount").textContent = `Showing ${shownFrom}–${shownTo} of ${filtered.length} live cases`;
   }
 
-  function applyParamsFromUrl() {
-    const params = new URLSearchParams(window.location.search);
-    if (params.has("overdue")) { document.getElementById("fOverdue").checked = true; expandFilters(); }
-    if (params.has("classified")) { document.getElementById("fClassified").checked = true; expandFilters(); }
-    if (params.has("urgency")) { document.getElementById("fUrgency").value = params.get("urgency"); expandFilters(); }
-  }
-
   function resetFilters() {
     document.getElementById("fSearch").value = "";
     document.getElementById("fCaseType").value = "";
-    document.getElementById("fDirectorate").value = "";
-    document.getElementById("fUrgency").value = "";
+    document.getElementById("fLead").value = "";
     document.getElementById("fMilestone").value = "";
     document.getElementById("fDateFrom").value = "";
     document.getElementById("fDateTo").value = "";
-    document.getElementById("fClassified").checked = false;
-    document.getElementById("fOverdue").checked = false;
     currentPage = 1;
     render();
-  }
-
-  function expandFilters() {
-    const el = document.getElementById("fMoreFilters");
-    if (!el.classList.contains("show")) bootstrap.Collapse.getOrCreateInstance(el).show();
   }
 
   document.addEventListener("DOMContentLoaded", function () {
     A.renderShell("live-cases", [{ label: "Live Cases" }]);
     populateFilterOptions();
-    applyParamsFromUrl();
 
     document.querySelectorAll("#lcClassTabs .tab-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         document.querySelectorAll("#lcClassTabs .tab-btn").forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
         activeCode = btn.getAttribute("data-code");
+        document.getElementById("fMainClass").value = activeCode === "ALL" ? "" : activeCode;
         populateFilterOptions.rebuildCaseTypes();
         document.getElementById("fCaseType").value = "";
         currentPage = 1;
         render();
       });
+    });
+
+    // Main Classification dropdown drives the matching tab (which rebuilds the sub-classification list)
+    document.getElementById("fMainClass").addEventListener("change", function () {
+      const code = this.value || "ALL";
+      const tab = document.querySelector('#lcClassTabs .tab-btn[data-code="' + code + '"]');
+      if (tab) { tab.click(); return; }
+      // No tab for this classification (e.g. Research and Publications): filter without a highlighted tab
+      document.querySelectorAll("#lcClassTabs .tab-btn").forEach(b => b.classList.remove("active"));
+      activeCode = code;
+      populateFilterOptions.rebuildCaseTypes();
+      document.getElementById("fCaseType").value = "";
+      currentPage = 1;
+      render();
     });
 
     document.getElementById("fToggleBtn").addEventListener("click", function () {
@@ -210,7 +210,7 @@
       });
     });
 
-    ["fSearch", "fCaseType", "fDirectorate", "fUrgency", "fMilestone", "fDateFrom", "fDateTo", "fClassified", "fOverdue"].forEach(id => {
+    ["fSearch", "fCaseType", "fLead", "fMilestone", "fDateFrom", "fDateTo"].forEach(id => {
       document.getElementById(id).addEventListener("input", () => { currentPage = 1; render(); });
       document.getElementById(id).addEventListener("change", () => { currentPage = 1; render(); });
     });

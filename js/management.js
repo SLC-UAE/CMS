@@ -59,15 +59,15 @@
   ];
 
   const AUDIT_TRAIL = [
-    { user: "u4", action: "Registered new case", target: "SLC-LEG-2026-00131", ts: "2026-09-19 08:40" },
+    { user: "u4", action: "Registered new case", target: "LEG-LOC-2026-360", ts: "2026-09-19 08:40" },
     { user: "u5", action: "Deleted a case activity", target: "SLC-LEG-2026-00073", ts: "2026-09-19 14:12" },
-    { user: "u9", action: "Approved classified case access", target: "SLC-LAO-2026-00102", ts: "2026-09-18 11:05" },
+    { user: "u9", action: "Approved classified case access", target: "LAO-LA-2025-50", ts: "2026-09-18 11:05" },
     { user: "u6", action: "Updated a document version", target: "SLC-TRN-2026-00114", ts: "2026-09-18 10:20" },
-    { user: "u1", action: "Approved milestone change to Final Review", target: "SLC-LEG-2026-00128", ts: "2026-09-17 15:50" },
+    { user: "u1", action: "Approved milestone change to Final Review", target: "TRS-AT-2026-95", ts: "2026-09-17 15:50" },
     { user: "u5", action: "Added new user account (Layla Al Qassimi)", target: "System — User Management", ts: "2026-09-16 09:30" },
-    { user: "u2", action: "Edited case general details", target: "SLC-LEG-2026-00119", ts: "2026-09-16 13:22" },
+    { user: "u2", action: "Edited case general details", target: "LEG-LOC-2026-361", ts: "2026-09-16 13:22" },
     { user: "u9", action: "Modified role permissions for Case Monitor", target: "System — Roles & Permissions", ts: "2026-09-15 17:05" },
-    { user: "u7", action: "Approved legal advice sign-off", target: "SLC-LAO-2026-00087", ts: "2026-09-15 12:40" },
+    { user: "u7", action: "Approved legal advice sign-off", target: "LEG-TC-2026-362", ts: "2026-09-15 12:40" },
     { user: "u4", action: "Cancelled pending case", target: "SLC-RP-2026-00041", ts: "2026-09-12 10:15" },
   ];
 
@@ -80,8 +80,8 @@
 
   /* Management Console module rights (module label -> role access flags) */
   const CONSOLE_MODULES = [
-    "User Management", "Roles & Permissions", "System Roles", "Case Roles", "Work Type Masters",
-    "Case Type Masters", "Milestone Masters", "Entity Masters", "Expert Masters", "Document Bank",
+    "User Management", "Roles & Permissions", "System Roles", "Case Roles", "Main Classification Masters",
+    "Sub-Classification Masters", "Milestone Masters", "Entity Masters", "Expert Masters", "Document Bank",
     "Reports User Rights", "Management Console User Rights", "Audit Trail",
   ];
   const CONSOLE_RIGHTS = {
@@ -89,8 +89,8 @@
     "Roles & Permissions": { sysadmin: true, pwradmin: true, reg: false, hod: false, sg: false },
     "System Roles": { sysadmin: true, pwradmin: true, reg: false, hod: false, sg: false },
     "Case Roles": { sysadmin: true, pwradmin: true, reg: false, hod: false, sg: false },
-    "Work Type Masters": { sysadmin: true, pwradmin: true, reg: false, hod: false, sg: false },
-    "Case Type Masters": { sysadmin: true, pwradmin: true, reg: false, hod: false, sg: false },
+    "Main Classification Masters": { sysadmin: true, pwradmin: true, reg: false, hod: false, sg: false },
+    "Sub-Classification Masters": { sysadmin: true, pwradmin: true, reg: false, hod: false, sg: false },
     "Milestone Masters": { sysadmin: true, pwradmin: true, reg: false, hod: false, sg: false },
     "Entity Masters": { sysadmin: true, pwradmin: true, reg: true, hod: false, sg: false },
     "Expert Masters": { sysadmin: true, pwradmin: true, reg: false, hod: false, sg: false },
@@ -106,8 +106,8 @@
     { id: "sec-roles-summary", icon: "bi-shield-lock", color: "#6D28D9", bg: "#F3E8FF", title: "Roles & Permissions", desc: "System role and case role summary — links to the full permissions matrix.", count: () => D.SYSTEM_ROLES.length + " + " + D.CASE_ROLES.length + " roles" },
     { id: "sec-system-roles", icon: "bi-person-badge", color: "#0033A0", bg: "#D6EAF8", title: "System Roles", desc: "The 13 BRD-defined system roles and their elevated authority flags.", count: () => D.SYSTEM_ROLES.length + " roles" },
     { id: "sec-case-roles", icon: "bi-person-workspace", color: "#107C10", bg: "#DCFCE7", title: "Case Roles", desc: "Per-case team roles: Lead, Team, Associate and Admin Member.", count: () => D.CASE_ROLES.length + " roles" },
-    { id: "sec-work-types", icon: "bi-diagram-3", color: "#8764B8", bg: "#F1E9FE", title: "Work Type Masters", desc: "The 5 SLC work types and their configured case types.", count: () => D.WORK_TYPES.length + " work types" },
-    { id: "sec-case-types", icon: "bi-tags", color: "#C2410C", bg: "#FFEDD5", title: "Case Type Masters", desc: "Flattened list of every case type across all work types.", count: () => CASE_TYPE_ROWS.length + " case types" },
+    { id: "sec-work-types", icon: "bi-diagram-3", color: "#8764B8", bg: "#F1E9FE", title: "Main Classification Masters", desc: "The 5 SLC main classifications and their configured sub-classifications.", count: () => D.WORK_TYPES.length + " main classifications" },
+    { id: "sec-case-types", icon: "bi-tags", color: "#C2410C", bg: "#FFEDD5", title: "Sub-Classification Masters", desc: "Flattened list of every sub-classification across all main classifications.", count: () => CASE_TYPE_ROWS.length + " sub-classifications" },
     { id: "sec-milestones", icon: "bi-flag", color: "#B45309", bg: "#FEF3C7", title: "Milestone Masters", desc: "Case lifecycle milestones, colours, badges and how they are set.", count: () => D.MILESTONES.length + " milestones" },
     { id: "sec-entities", icon: "bi-building", color: "#003D6B", bg: "#EAF4FB", title: "Entity Masters", desc: "Requesting and related government entities on file.", count: () => D.ENTITIES.length + " entities" },
     { id: "sec-experts", icon: "bi-mortarboard", color: "#BE185D", bg: "#FCE7F3", title: "Expert Masters", desc: "Subject-matter and legal experts available for case consultation.", count: () => EXPERTS.length + " experts" },
@@ -125,7 +125,7 @@
     const kpis = [
       { icon: "bi-people", bg: "var(--light-blue)", color: "var(--primary-blue)", value: D.USERS.length, label: "Total Users", sub: `${D.USERS.length - inactiveCount} active / ${inactiveCount} inactive`, target: "sec-users" },
       { icon: "bi-person-badge", bg: "#F3E8FF", color: "#6D28D9", value: D.SYSTEM_ROLES.length, label: "System Roles", sub: D.SYSTEM_ROLES.filter(r => r.elevated).length + " elevated", target: "sec-system-roles" },
-      { icon: "bi-diagram-3", bg: "#DCFCE7", color: "#15803D", value: D.WORK_TYPES.length, label: "Work Types", sub: CASE_TYPE_ROWS.length + " case types", target: "sec-work-types" },
+      { icon: "bi-diagram-3", bg: "#DCFCE7", color: "#15803D", value: D.WORK_TYPES.length, label: "Main Classifications", sub: CASE_TYPE_ROWS.length + " sub-classifications", target: "sec-work-types" },
       { icon: "bi-building", bg: "#EAF4FB", color: "#003D6B", value: D.ENTITIES.length, label: "Registered Entities", sub: "Requesting / related bodies", target: "sec-entities" },
     ];
     document.getElementById("mgmtKpiRow").innerHTML = kpis.map(k => `
@@ -158,8 +158,8 @@
     document.getElementById("metaRolesSummary").textContent = (D.SYSTEM_ROLES.length + D.CASE_ROLES.length) + " roles total";
     document.getElementById("metaSystemRoles").textContent = D.SYSTEM_ROLES.length + " roles";
     document.getElementById("metaCaseRoles").textContent = D.CASE_ROLES.length + " roles";
-    document.getElementById("metaWorkTypes").textContent = D.WORK_TYPES.length + " work types";
-    document.getElementById("metaCaseTypes").textContent = CASE_TYPE_ROWS.length + " case types";
+    document.getElementById("metaWorkTypes").textContent = D.WORK_TYPES.length + " main classifications";
+    document.getElementById("metaCaseTypes").textContent = CASE_TYPE_ROWS.length + " sub-classifications";
     document.getElementById("metaMilestones").textContent = D.MILESTONES.length + " milestones";
     document.getElementById("metaEntities").textContent = D.ENTITIES.length + " entities";
     document.getElementById("metaExperts").textContent = EXPERTS.length + " experts";
@@ -196,7 +196,7 @@
     document.getElementById("tblCaseRoles").innerHTML = D.CASE_ROLES.map(r => `
       <tr><td class="fw-700">${r.name}</td><td>${r.desc}</td></tr>`).join("");
 
-    /* --- Work Type Masters table --- */
+    /* --- Main Classification Masters table --- */
     document.getElementById("tblWorkTypes").innerHTML = D.WORK_TYPES.map(w => `
       <tr>
         <td><span class="swatch-dot" style="background:${w.color};"></span> <strong>${w.id}</strong></td>
@@ -204,7 +204,7 @@
         <td style="font-size:12.4px;">${w.caseTypes.join(", ")}</td>
       </tr>`).join("");
 
-    /* --- Case Type Masters table --- */
+    /* --- Sub-Classification Masters table --- */
     document.getElementById("tblCaseTypes").innerHTML = CASE_TYPE_ROWS.map(ct => `
       <tr>
         <td>${ct.caseType}</td>

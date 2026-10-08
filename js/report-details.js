@@ -88,8 +88,8 @@
       const data = [412, 268, 198, 231, 139];
       return {
         primary: { type: "doughnut", labels, datasets: [{ data, backgroundColor: D.WORK_TYPES.map(w => w.color), borderWidth: 2, borderColor: t.border }], cutout: "66%" },
-        chartTitle1: "Live &amp; Closed Cases by Work Type",
-        table: countTable(labels, data, "Work Type", "Cases"),
+        chartTitle1: "Live &amp; Closed Cases by Main Classification",
+        table: countTable(labels, data, "Main Classification", "Cases"),
         narrative: "Legislation accounts for the largest share of case volume (33%), followed by Legal Advice and Opinion (21%). This mirrors the breakdown shown on the Executive Dashboard.",
       };
     },
@@ -102,12 +102,12 @@
           labels: sorted.map(x => x.ct),
           datasets: [{ label: "Cases", data: sorted.map(x => x.count), backgroundColor: palette.blue, borderRadius: 6 }],
         },
-        chartTitle1: "Top Case Types (Chart shows top 8 of 21 configured case types)",
+        chartTitle1: "Top Sub-Classifications (Chart shows top 8 of 21 configured sub-classifications)",
         table: {
-          cols: ["Work Type", "Case Type", "Cases", "% of Total"],
+          cols: ["Main Classification", "Sub-Classification", "Cases", "% of Total"],
           rows: CASE_TYPE_BREAKDOWN.map(x => [x.wt, x.ct, x.count.toLocaleString(), pct(x.count, 1248)]),
         },
-        narrative: "Local Legislations (210) and Legal Advice (190) are the highest-volume case types. Within the General work type, Committees and Information Technology lead the caseload.",
+        narrative: "Local Legislations (210) and Legal Advice (190) are the highest-volume sub-classifications. Within the General main classification, Committees and Information Technology lead the caseload.",
       };
     },
 
@@ -174,9 +174,9 @@
       const data = [7, 4, 2, 5, 1];
       return {
         primary: { type: "bar", labels, datasets: [{ label: "Overdue Cases", data, backgroundColor: D.WORK_TYPES.map(w => w.color), borderRadius: 6 }], showLegend: false },
-        chartTitle1: "Overdue Cases by Work Type (19 total, per Executive Dashboard KPI)",
-        table: countTable(labels, data, "Work Type", "Overdue Cases"),
-        narrative: "Legislation cases account for over a third of all overdue cases (7 of 19). Ratification Review — Bilateral Investment Treaty (SLC-LEG-2026-00119) is 5 days past its Proposed Completion Date.",
+        chartTitle1: "Overdue Cases by Main Classification (19 total, per Executive Dashboard KPI)",
+        table: countTable(labels, data, "Main Classification", "Overdue Cases"),
+        narrative: "Legislation cases account for over a third of all overdue cases (7 of 19). Ratification Review — Bilateral Investment Treaty (LEG-LOC-2026-361) is 5 days past its Proposed Completion Date.",
       };
     },
 
@@ -280,7 +280,7 @@
         primary: { type: "line", labels: MONTHS12, datasets: [{ label: "Gazette Issues Published", data, borderColor: palette.pink, backgroundColor: "rgba(194,57,179,.08)", fill: true, tension: .35, pointRadius: 3 }], showLegend: false },
         chartTitle1: "Official Gazette Issue Publication Tracking",
         table: { cols: ["Month", "Issues Published"], rows: MONTHS12.map((m, i) => [m, data[i]]) },
-        narrative: "Gazette publication cadence has increased in the second half of the year. The most recent issue in progress is Official Gazette Issue No. 214 (case SLC-RP-2026-00033), covering Q3 local legislations.",
+        narrative: "Gazette publication cadence has increased in the second half of the year. The most recent issue in progress is Official Gazette Issue No. 214 (case TRS-AT-2026-94), covering Q3 local legislations.",
       };
     },
   };
