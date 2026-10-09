@@ -168,32 +168,42 @@
     A.renderShell("live-cases", [{ label: "Live Cases" }]);
     populateFilterOptions();
 
-    document.querySelectorAll("#lcClassTabs .tab-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll("#lcClassTabs .tab-btn").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        activeCode = btn.getAttribute("data-code");
-        document.getElementById("fMainClass").value = activeCode === "ALL" ? "" : activeCode;
-        populateFilterOptions.rebuildCaseTypes();
-        document.getElementById("fCaseType").value = "";
-        currentPage = 1;
-        render();
+    // Classification accordion: one section open at a time; the shared table card moves into the open section
+    const acc = document.getElementById("lcAccordion");
+    const tableCard = document.getElementById("lcTableCard");
+    function openSection(code) {
+      let opened = false;
+      acc.querySelectorAll(".acc-item").forEach(item => {
+        const on = item.getAttribute("data-code") === code;
+        item.classList.toggle("open", on);
+        item.querySelector(".acc-head").setAttribute("aria-expanded", on);
+        if (on) { item.querySelector(".acc-body").appendChild(tableCard); opened = true; }
       });
-    });
-
-    // Main Classification dropdown drives the matching tab (which rebuilds the sub-classification list)
-    document.getElementById("fMainClass").addEventListener("change", function () {
-      const code = this.value || "ALL";
-      const tab = document.querySelector('#lcClassTabs .tab-btn[data-code="' + code + '"]');
-      if (tab) { tab.click(); return; }
-      // No tab for this classification (e.g. Research and Publications): filter without a highlighted tab
-      document.querySelectorAll("#lcClassTabs .tab-btn").forEach(b => b.classList.remove("active"));
+      return opened;
+    }
+    function selectClass(code) {
       activeCode = code;
+      // Classifications without a section of their own (e.g. Research and Publications) show inside "All"
+      if (!openSection(code)) openSection("ALL");
+      document.getElementById("fMainClass").value = code === "ALL" ? "" : code;
       populateFilterOptions.rebuildCaseTypes();
       document.getElementById("fCaseType").value = "";
       currentPage = 1;
       render();
-    });
+    }
+    acc.querySelectorAll(".acc-head").forEach(head => head.addEventListener("click", () => {
+      const item = head.parentElement;
+      if (item.classList.contains("open")) {  // click an open section to collapse it
+        item.classList.remove("open");
+        head.setAttribute("aria-expanded", "false");
+      } else {
+        selectClass(item.getAttribute("data-code"));
+      }
+    }));
+    openSection("ALL");
+
+    // Main Classification dropdown opens the matching section (and rebuilds the sub-classification list)
+    document.getElementById("fMainClass").addEventListener("change", function () { selectClass(this.value || "ALL"); });
 
     document.getElementById("fToggleBtn").addEventListener("click", function () {
       const expanded = this.getAttribute("aria-expanded") === "true";

@@ -57,17 +57,32 @@
     </div>
   </div>
 
-  <!-- Classification tabs -->
-  <div class="tab-nav" id="ccClassTabs">
-    <button type="button" class="tab-btn active" data-code="ALL" data-en="All" data-ar="الكل">All</button>
-    <button type="button" class="tab-btn" data-code="LEG" data-en="Legislation (LEG)" data-ar="التشريعات">Legislation (LEG)</button>
-    <button type="button" class="tab-btn" data-code="LAO" data-en="Legal Advice &amp; Opinion (LAO)" data-ar="الفتوى والرأي القانوني">Legal Advice &amp; Opinion (LAO)</button>
-    <button type="button" class="tab-btn" data-code="TRN" data-en="Translation (TRN)" data-ar="الترجمة">Translation (TRN)</button>
-    <button type="button" class="tab-btn" data-code="GEN" data-en="General (GEN)" data-ar="العامة">General (GEN)</button>
+  <!-- Classification accordion (the table card below is moved into the open section by the page script) -->
+  <div class="case-accordion" id="ccAccordion">
+    <div class="acc-item open" data-code="ALL">
+      <button type="button" class="acc-head" aria-expanded="true"><span data-en="All" data-ar="الكل">All</span><i class="bi bi-chevron-down"></i></button>
+      <div class="acc-body flush"></div>
+    </div>
+    <div class="acc-item" data-code="LEG">
+      <button type="button" class="acc-head" aria-expanded="false"><span data-en="Legislation (LEG)" data-ar="التشريعات">Legislation (LEG)</span><i class="bi bi-chevron-down"></i></button>
+      <div class="acc-body flush"></div>
+    </div>
+    <div class="acc-item" data-code="LAO">
+      <button type="button" class="acc-head" aria-expanded="false"><span data-en="Legal Advice &amp; Opinion (LAO)" data-ar="الفتوى والرأي القانوني">Legal Advice &amp; Opinion (LAO)</span><i class="bi bi-chevron-down"></i></button>
+      <div class="acc-body flush"></div>
+    </div>
+    <div class="acc-item" data-code="TRN">
+      <button type="button" class="acc-head" aria-expanded="false"><span data-en="Translation (TRN)" data-ar="الترجمة">Translation (TRN)</span><i class="bi bi-chevron-down"></i></button>
+      <div class="acc-body flush"></div>
+    </div>
+    <div class="acc-item" data-code="GEN">
+      <button type="button" class="acc-head" aria-expanded="false"><span data-en="General (GEN)" data-ar="العامة">General (GEN)</span><i class="bi bi-chevron-down"></i></button>
+      <div class="acc-body flush"></div>
+    </div>
   </div>
 
   <!-- Table -->
-  <div class="table-card" style="border-top-left-radius:0;border-top-right-radius:0;">
+  <div class="table-card" id="ccTableCard">
     <div class="table-scroll">
       <table class="table-modern mb-0" id="completedCasesTable">
         <thead>

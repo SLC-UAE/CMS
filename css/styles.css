@@ -437,6 +437,9 @@ tr.row-classified:hover { background: var(--hover-red-light) !important; }
 .acc-item.open .acc-head i { transform: rotate(180deg); }
 .acc-body { display: none; padding: 20px; animation: tabFadeIn .18s ease; }
 .acc-item.open .acc-body { display: block; }
+/* Table inside an accordion section (Live / Completed Cases): the section card already supplies the frame */
+.acc-body.flush { padding: 0; }
+.acc-body.flush .table-card { border: none; box-shadow: none; border-radius: 0; margin: 0; }
 @keyframes tabFadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
 /* ---------------------------------------------------------------------- */
